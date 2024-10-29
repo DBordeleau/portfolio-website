@@ -19,8 +19,7 @@ export default function Intro() {
             transition={{ 
                 type: "tween", 
                 duration: 0.2
-              }}
-            >
+              }}>
                 <Image 
                 src='/headshot.jpg' 
                 width='192' 
@@ -35,10 +34,12 @@ export default function Intro() {
         <motion.h1 className='mb-10 mt-4 px-4 text-2x1 font-medium !leading-[1.5] sm:text-4x1'
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y:0 }}>
-            <span className="font-bold">Hey there, I'm Dillon!</span> I'm a{" "}
+            <span className="font-bold">Hey there! My name's Dillon.</span> I'm a{" "}
             <span className="font-bold">third-year software engineering student</span> seeking internship/co-op opportunities. I enjoy{" "}
             <span className="font-bold">building apps and creative problem solving</span>. My focus is{" "}
-            <span className="underline">full-stack development</span>.
+            <span className="underline">full-stack development</span>. 
+            My current skills include:{" "}
+            <span className="font-bold">Python, TypeScript/JavaScript, React, Node.js & Express, Next.js, Bootstrap & Tailwind CSS and SQL.</span>
         </motion.h1>
 
         <motion.div className='flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium'
