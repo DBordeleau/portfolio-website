@@ -42,7 +42,7 @@ export default function Intro() {
             <span className="font-bold">building apps and creative problem solving</span>. My focus is{" "}
             <span className="underline">full-stack development</span>. 
             My current skills include:{" "}
-            <span className="font-bold">Python, TypeScript/JavaScript, React, Node.js & Express, Next.js, Bootstrap & Tailwind CSS and SQL.</span>
+            <span className="font-bold">Python, Flask, Django, TypeScript/JavaScript, React, Node.js & Express, Bootstrap & Tailwind CSS and SQL.</span>
         </motion.h1>
 
         <motion.div className='flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium'

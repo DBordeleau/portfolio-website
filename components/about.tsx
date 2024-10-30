@@ -20,9 +20,9 @@ export default function About() {
         I've enjoyed solving problems with software since my early teens but I had never formally studied computer science. 
         I <span className="font-medium">enrolled full-time at Carleton University</span> in the fall of 2024 and have been studying full-time since. 
         In addition to my coursework, I have been learning front-end development and working on some independent projects
-        in my free time. My current skills include:{" "}
+        in my free time. I'm seeking {" "}
         <span className="font-medium">
-          Python, TypeScript/JavaScript, React, Node.js & Express, Next.js, Bootstrap & Tailwind CSS and SQL.
+        internship opportunities where I can continue to develop my full-stack development skills and excel as an important part of your team.
         </span>
       </p>
 
