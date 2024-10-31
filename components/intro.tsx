@@ -56,11 +56,11 @@ export default function Intro() {
               setLastClickTime(Date.now);
             }}>Contact me <BsArrowRight className='opacity-70 group-hover:translate-x-2 transition' /></Link>
             
-            <a className='group bg-white hover:bg-gray-100 px-7 py-3 flex items-center gap-2 rounded-full outline-none transition-all cursor-pointer borderBlack' href='/DillonBordeleauResume.pdf' download={true}>Download my Résumé <HiDownload className='opacity-70 group-hover:translate-y-1 transition'/></a>
+            <a className='group bg-white hover:bg-gray-100 px-7 py-3 flex items-center gap-2 rounded-full outline-none transition-all cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60 dark:hover:bg-white/20 dark:hover:text-white' href='/DillonBordeleauResume.pdf' download={true}>Download my Résumé <HiDownload className='opacity-70 group-hover:translate-y-1 transition'/></a>
             
-            <a className='bg-white p-4 flex text-gray-700 items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition-all cursor-pointer borderBlack' href='https://www.linkedin.com/in/dillonbordeleau/' target='_blank'><BsLinkedin/></a>
+            <a className='bg-white p-4 flex text-gray-700 items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition-all cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60 dark:hover:bg-white/20 dark:hover:text-white' href='https://www.linkedin.com/in/dillonbordeleau/' target='_blank'><BsLinkedin/></a>
             
-            <a className='bg-white p-4 flex text-[1.35rem] text-gray-700 items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition-all cursor-pointer borderBlack' href='https://github.com/DBordeleau/' target='_blank'><FaGithubSquare/></a>
+            <a className='bg-white p-4 flex text-[1.35rem] text-gray-700 items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition-all cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60 dark:hover:bg-white/20 dark:hover:text-white' href='https://github.com/DBordeleau/' target='_blank'><FaGithubSquare/></a>
         </motion.div>
     </section>
   )

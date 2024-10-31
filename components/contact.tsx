@@ -19,9 +19,9 @@ export default function Contact() {
     viewport={{once: true}}
     >
         <SectionHeader>Get in touch</SectionHeader>
-        <p className='text-gray-700 -mt-6'>You can reach me directly at <a className='underline' href="mailto:dillonbordeleau@gmail.com">DillonBordeleau@gmail.com</a> or use this form.</p>
+        <p className='text-gray-700 dark:text-white/80 -mt-6'>You can reach me directly at <a className='underline' href="mailto:dillonbordeleau@gmail.com">DillonBordeleau@gmail.com</a> or use this form.</p>
 
-        <form className='mt-10 flex flex-col' action={async formData => {
+        <form className='mt-10 flex flex-col dark:text-black' action={async formData => {
           const { data, error } = await sendEmail(formData);
 
           if(error) {
@@ -31,8 +31,8 @@ export default function Contact() {
 
           toast.success('Email sent!')
         }}>
-            <input name="senderEmail" className='px-4 h-14 rounded-lg border border-black/[10]' type='email' required maxLength={100} placeholder='email@example.com' />
-            <textarea name="message" placeholder='Enter your message' className='w-[100%] sm:w-[50rem] px-4 pt-4 h-[20rem] sm:h-[32rem] my-3 rouned-lg border border-black/[10]' required />
+            <input name="senderEmail" className='px-4 h-14 rounded-lg border border-black/[10] dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' type='email' required maxLength={100} placeholder='email@example.com' />
+            <textarea name="message" placeholder='Enter your message' className='w-[100%] sm:w-[50rem] px-4 pt-4 h-[20rem] sm:h-[32rem] my-3 rounded-lg border border-black/10 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' required />
             <SubmitBtn />
         </form>
     </motion.section>

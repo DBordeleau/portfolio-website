@@ -51,7 +51,7 @@ export default function SkillsList() {
                 const IconComponent = iconComponents[skill.icon as keyof typeof iconComponents];
                 return (
                     <motion.li
-                        className="bg-white borderBlack rounded-xl px-5 py-3 text-center flex items-center gap-2 hover:shadow-lg hover:bg-gray-50 transition-all"
+                        className="bg-white borderBlack rounded-xl px-5 py-3 text-center flex items-center gap-2 hover:shadow-lg hover:bg-gray-50 transition-all dark:bg-white/10 dark:hover:bg-white/20 dark:text-white/80"
                         key={index}
                         variants={fadeInAnimationVariants}
                         initial="initial"

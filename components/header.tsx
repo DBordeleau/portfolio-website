@@ -31,7 +31,10 @@ export default function Header() {
       sm:top-6 
       sm:h-[3.25rem] 
       sm:w-[36rem] 
-      sm:rounded-full"
+      sm:rounded-full
+      dark:bg-gray-950
+      dark:border-black/40
+      dark:bg-opacity-70"
         initial={{ y: -100, x: "-50%", opacity: 0 }}
         animate={{ y: 0, x: "-50%", opacity: 1 }}
       ></motion.div>
@@ -40,8 +43,8 @@ export default function Header() {
             { //generate nav items for every item in links array
             links.map(link => (
                 <motion.li className='h-3/4 flex items-center justify-center relative' key ={link.hash} initial={{ y: -100, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
-                    <Link className={clsx('flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition', {
-                      'text-gray-950': activeSection === link.name
+                    <Link className={clsx('flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition dark:text-gray-500 dark:hover:text-gray-300', {
+                      'text-gray-950 dark:text-gray-200': activeSection === link.name
                     })} href={link.hash}
                     onClick={() => {
                       setActiveSection(link.name)
@@ -51,7 +54,7 @@ export default function Header() {
 
                         {
                           link.name === activeSection && (
-                            <motion.span className='bg-gray-200 rounded-full absolute inset-0 -z-10'
+                            <motion.span className='bg-gray-200 rounded-full absolute inset-0 -z-10 dark:bg-gray-800'
                             layoutId='activeSection'
                             transition={{
                               type: "spring",
