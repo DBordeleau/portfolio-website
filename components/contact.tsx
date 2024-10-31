@@ -32,7 +32,7 @@ export default function Contact() {
           toast.success('Email sent!')
         }}>
             <input name="senderEmail" className='px-4 h-14 rounded-lg border border-black/[10] dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' type='email' required maxLength={100} placeholder='email@example.com' />
-            <textarea name="message" placeholder='Enter your message' className='w-[100%] sm:w-[50rem] px-4 pt-4 h-[20rem] sm:h-[32rem] my-3 rounded-lg border border-black/10 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' required />
+            <textarea name="message" placeholder='Enter your message' className='w-[100%] sm:w-[40rem] px-4 pt-4 h-[20rem] my-3 rounded-lg border border-black/10 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' required />
             <SubmitBtn />
         </form>
     </motion.section>
