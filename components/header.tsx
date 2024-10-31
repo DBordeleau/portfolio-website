@@ -18,7 +18,7 @@ export default function Header() {
       left-1/2 
       -translate-x-1/2 
       h-[4.5rem] 
-      max-w-[90%]
+      w-full
       rounded-none 
       border 
       border-white 
