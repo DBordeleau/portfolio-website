@@ -30,7 +30,7 @@ export default function Intro() {
                 quality="95" 
                 priority={true} 
                 alt='Dillon Bordeleau portrait' 
-                className='rounded-full h-24 w-24 object-cover border-[0.35rem] border-white shadow-xl'/>
+                className='rounded-full h-28 w-28 object-cover border-[0.35rem] [border-image:linear-gradient(to_right,bg-emerald-100,bg-emerald-200)_30] border-transparent shadow-xl'/>
             </motion.div>
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function Intro() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y:0 }}>
             <span className="font-bold">Hey there! My name's Dillon.</span> I'm a{" "}
-            <span className="font-bold">third-year software engineering student</span> seeking internship/co-op opportunities. I enjoy{" "}
+            <span className="font-bold">third-year Computer Science/Software Engineering student</span> seeking internship/co-op opportunities. I enjoy{" "}
             <span className="font-bold">building apps and creative problem solving</span>. My focus is{" "}
             <span className="underline">full-stack development</span>. 
             My current skills include:{" "}

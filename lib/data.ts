@@ -41,28 +41,57 @@ export const experiencesData = [
 
 export const projectsData = [
     {
-        title: "South Park Randomizer",
-        description:
-            "This is a Node.js app that fetches random South Park episodes via the OMDB API. The website also has a dark mode toggle and can filter out seen episodes from episode generation. The project was deployed using fly.io",
-        tags: ["JavaScript", "Express.js", "Bootstrap", "HTML", "Git"],
-        imageUrl: sprandomizerImg,
-        demoLink: 'https://southparkrandomizer.com/',
-    },
-    {
         title: "Portfolio Website",
         description:
-            "This is a Next.js app I made to host my portfolio projects and help me connect with recruiters for internship opportunities. You are viewing the live demo right now.",
-        tags: ["TypeScript", "React", "Next.js", "Tailwind", "Framer Motion", "HTML", "Git"],
+            "This is a Next.js app I made to host my portfolio projects and help me connect with recruiters for internship opportunities. The website is a single page composed of react components I wrote and styled with Tailwind. Framer is used to animate components. You are viewing the live demo right now.",
+        tags: ["TypeScript", "React", "Next.js", "Tailwind", "Framer Motion", "Git"],
         imageUrl: portfoliositeImg,
         demoLink: '',
+        githubLink: 'https://github.com/DBordeleau/portfolio-website',
+    },
+    {
+        title: "South Park Randomizer",
+        description:
+            "This is a Node.js app that fetches random South Park episodes via the OMDB API. The website also has a dark mode toggle and can filter out seen episodes from episode generation. The project was deployed using fly.io. I am currently rebuilding/redesigning the app with React.",
+        tags: ["JavaScript", "Express.js", "Bootstrap", "Git"],
+        imageUrl: sprandomizerImg,
+        demoLink: 'https://southparkrandomizer.com/',
+        githubLink: '',
     },
     {
         title: "Machine Learning App",
         description: "Coming soon!",
-        tags: ["Python", "TensorFlow", "SQL", "Django", "Tailwind", "HTML", "Git"],
+        tags: ["Python", "Django", "TensorFlow", "React", "SQL", "Tailwind", "Git"],
         imageUrl: comingsoonpicImg,
         demoLink: '',
-    }
+        githubLink: '',
+    },
+    /*
+    {
+        title: "Pandas/Data Manipulation App",
+        description: "This is a app I made with Python, Pandas and Django that organizes and dynamically displays fantasy hockey information from a SQL database."
+        tags: ["Python", "Pandas", "Django", "React", "SQL", "Tailwind", "HTML", "Git"],
+        imageUrl: datawebsiteImg,
+        demoLink: '',
+        githubLink: '',
+    },
+    {
+        title: "Blog/Social Media Clone",
+        description: "This is a Node.js app I made using React and Tailwind CSS. The site features account registration, login authentication, and has the ability for users to make posts and attach images to them."
+        tags: ["TypeScript", "React", "Node.js", "Tailwind", "Framer Motion", "SQL", "HTML", "Git"],
+        imageUrl: datawebsiteImg,
+        demoLink: '',
+        githubLink: '',
+    },
+    {
+        title: "Dilbo-ui & Demo Site",
+        description: "This is a UI component library I built using React, Tailwind and Storybook. I published it publically on npm and you can import it yourself by running npm i dilbo-ui and then @import '@DBordeleau/components'. You can visit the live demo to access a Node.js where you can see all the components I've made."
+        tags: ["React", "Tailwind", "Storybook", "Node.js"],
+        imageUrl: datawebsiteImg,
+        demoLink: '',
+        githubLink: '',
+    },
+    */
 
 ] as const;
 
