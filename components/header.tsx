@@ -18,7 +18,7 @@ export default function Header() {
       left-1/2 
       -translate-x-1/2 
       h-[4.5rem] 
-      w-full 
+      max-w-[90%]
       rounded-none 
       border 
       border-white 
@@ -43,7 +43,7 @@ export default function Header() {
             { //generate nav items for every item in links array
             links.map(link => (
                 <motion.li className='h-3/4 flex items-center justify-center relative' key ={link.hash} initial={{ y: -100, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
-                    <Link className={clsx('flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition dark:text-gray-500 dark:hover:text-gray-300', {
+                    <Link className={clsx('flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition dark:hover:text-gray-300', {
                       'text-gray-950 dark:text-gray-200': activeSection === link.name
                     })} href={link.hash}
                     onClick={() => {
