@@ -52,8 +52,8 @@ export const projectsData = [
     {
         title: "South Park Randomizer",
         description:
-            "This is a Node.js app that fetches random South Park episodes via the OMDB API. The website also has a dark mode toggle and can filter out seen episodes from episode generation. The project was deployed using fly.io. I am currently rebuilding/redesigning the app with React.",
-        tags: ["JavaScript", "Express.js", "Bootstrap", "Git"],
+            "This is a web app that fetches random South Park episodes via the OMDB API. I built it using React, Tailwind and Express. The website features a dark mode toggle and the ability to filter out already seen episodes. The seen episode list has some entry and exit animations I wrote using framer motion.",
+        tags: ["TypeScript", "Express.js", "Tailwind", "React", "Framer Motion", "Git"],
         imageUrl: sprandomizerImg,
         demoLink: 'https://southparkrandomizer.com/',
         githubLink: '',
