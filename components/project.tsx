@@ -35,13 +35,15 @@ export default function Project({
     <section className='bg-gray-100 max-w-[44rem] borderBlack rounded-lg overflow-hidden sm:pr-8 relative sm:h-[25rem] mb-3 sm:mb- last:mb-0 hover:bg-gray-200 transition dark:bg-white/10 dark:hover:bg-white/20 dark:text-white'>
         <div className='pt-4 pb-6 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[60%] flex flex-col h-full sm:group-even:ml-[18rem] items-center text-center group-even:even:pl-8'>
             <h3 className='text-2xl font-semibold'>{title}</h3>
+            <div className='flex flex-row'>
             {demoLink && ( // only render the live demo link if demoLink isn't empty
                 <a href={demoLink} target='_blank' className='text-blue-500 underline'>Live Demo</a>
             )}
             
             {githubLink && ( // only render the github link if githublink isn't empty
-                <a href={githubLink} target='_blank' className='text-blue-500 underline mt-1'>GitHub Repo</a>
+                <a href={githubLink} target='_blank' className='text-blue-500 underline ml-2'>GitHub Repo</a>
             )}
+            </div>
             <p className='mt-2 text-[.8rem] sm:text-[1rem] leading-relaxed text-gray-700 mb-4 dark:text-white/70'>{description}</p>
             <ul className='flex flex-wrap mt-4 gap-2 sm:mt-auto'>
                 {tags.map((tag, index) => (

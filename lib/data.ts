@@ -56,7 +56,7 @@ export const projectsData = [
         tags: ["TypeScript", "Express.js", "Tailwind", "React", "Framer Motion", "Git"],
         imageUrl: sprandomizerImg,
         demoLink: 'https://southparkrandomizer.com/',
-        githubLink: '',
+        githubLink: 'https://github.com/DBordeleau/south-park-randomizer-react',
     },
     {
         title: "Machine Learning App",
