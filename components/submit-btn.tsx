@@ -1,6 +1,10 @@
 import React from 'react'
 import { useFormStatus } from 'react-dom';
+import toast from 'react-hot-toast';
 import { FaPaperPlane } from 'react-icons/fa'
+
+const senderEmail = document.getElementById('senderEmail')?.innerText;
+const message = document.getElementById('message')?.innerText
 
 export default function SubmitBtn() {
     const { pending } = useFormStatus();

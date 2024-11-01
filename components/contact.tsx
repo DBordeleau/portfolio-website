@@ -23,6 +23,24 @@ export default function Contact() {
 
         <form className='mt-10 flex flex-col dark:text-black' action={async formData => {
           const { data, error } = await sendEmail(formData);
+          const flowey = document.getElementById('flower');
+          let easterEggAudio = new Audio('/easter-egg-audio.wav')
+
+          if(error == "easter egg") { //Easter egg
+            easterEggAudio.play();
+            flowey?.classList.add('flowey');
+        
+            toast('Clever. Verrrryyy clever.', {
+              icon: '🌻',
+              position: "top-center",
+              style: {
+                color: 'black',
+                backgroundColor: 'yellow',
+                border: '1px solid black',
+              }
+          })
+          return;
+        }
 
           if(error) {
             toast.error(error)
@@ -31,8 +49,8 @@ export default function Contact() {
 
           toast.success('Email sent!')
         }}>
-            <input name="senderEmail" className='px-4 h-14 rounded-lg border border-black/[10] dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' type='email' required maxLength={100} placeholder='email@example.com' />
-            <textarea name="message" placeholder='Enter your message' className='w-[100%] sm:w-[40rem] px-4 pt-4 h-[20rem] my-3 rounded-lg border border-black/10 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' required />
+            <input id='senderEmail' name="senderEmail" className='px-4 h-14 rounded-lg border border-black/[10] dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' type='email' required maxLength={100} placeholder='email@example.com' />
+            <textarea id='message' name="message" placeholder='Enter your message' className='w-[100%] sm:w-[40rem] px-4 pt-4 h-[20rem] my-3 rounded-lg border border-black/[10] dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' required />
             <SubmitBtn />
         </form>
     </motion.section>

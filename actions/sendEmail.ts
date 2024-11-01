@@ -23,6 +23,11 @@ export const sendEmail = async (formData: FormData) => {
             error: "Invalid form message. Form content must be only text and cannot be empty. Form message must also be less than 5000 characters."
         };
     }
+    if(senderEmail == 'howdy@howdy.howdy' && message == 'howdy') { // Easter egg
+      return{ error: "easter egg"
+      };
+    }
+
     let data;
     try {
       data = await resend.emails.send({
