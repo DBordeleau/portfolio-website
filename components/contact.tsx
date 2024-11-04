@@ -12,7 +12,7 @@ export default function Contact() {
     const { ref } = useSectionInView('Contact')
 
   return (
-    <motion.section id="contact" ref={ref} className='scroll-mt-28 mt-20 mb-20 sm:mb-28 w-[min(100%, 50rem)] flex flex-col text-center'
+    <motion.section id="contact" ref={ref} className='scroll-mt-28 mt-8 mb-20 sm:mb-28 w-[min(100%, 50rem)] flex flex-col text-center'
     initial={{opacity: 0,}}
     whileInView={{opacity: 1,}}
     transition={{duration: 2}}
