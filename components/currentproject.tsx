@@ -8,7 +8,7 @@ import SectionHeader from './section-header';
 export default function CurrentProject() {
     const { ref } = useSectionInView('Current Projects');
   return (
-    <motion.section ref={ref} id='current_projects' className='mt-14 max-w-[45rem] text-center leading-8 sm:mb-40 scroll-mt-28'
+    <motion.section ref={ref} id='current_projects' className='mt-14 max-w-[45rem] text-center leading-8 sm:mb-10 scroll-mt-28'
       initial={{opacity: 0,}}
       whileInView={{opacity: 1,}}
       transition={{duration: 2}}
