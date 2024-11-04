@@ -33,7 +33,7 @@ export default function Project({
         className='group mb-3 sm:mb-8 last:mb-0'
     >
     <section className='bg-gray-100 max-w-[44rem] borderBlack rounded-lg overflow-hidden sm:pr-8 relative sm:h-[25rem] mb-3 sm:mb- last:mb-0 hover:bg-gray-200 transition dark:bg-white/10 dark:hover:bg-white/20 dark:text-white'>
-        <div className='pt-4 pb-6 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[60%] flex flex-col h-full sm:group-even:ml-[18rem] items-center text-center group-even:even:pl-8'>
+        <div className='pt-4 pb-6 px-5 sm:pl-10 sm:pr-2 sm:pt-10 md:max-w-[60%] flex flex-col h-full md:group-even:ml-[18rem] items-center text-center group-even:even:pl-8'>
             <h3 className='text-2xl font-semibold'>{title}</h3>
             <div className='flex flex-row'>
             {demoLink && ( // only render the live demo link if demoLink isn't empty
@@ -44,18 +44,18 @@ export default function Project({
                 <a href={githubLink} target='_blank' className='text-blue-500 underline ml-2'>GitHub Repo</a>
             )}
             </div>
-            <p className='mt-2 text-[.8rem] sm:text-[1rem] leading-relaxed text-gray-700 mb-4 dark:text-white/70'>{description}</p>
-            <ul className='flex flex-wrap mt-4 gap-2 sm:mt-auto'>
+            <p className='mt-2 text-[.8rem] sm:text-[.9rem] leading-relaxed text-gray-700 mb-4 dark:text-white/70'>{description}</p>
+            <ul className='flex flex-wrap justify-center mt-4 gap-2 sm:mt-auto'>
                 {tags.map((tag, index) => (
                     <li className='bg-black/[0.7] px-2 py-1 text-[0.7rem] sm:text-[.8rem] uppercase tracking-wider text-white rounded-full hover:scale-105 dark:text-white/70' key={index}>{tag}</li>
                 ))}
             </ul>
         </div>
 
-        <Image src={imageUrl} alt={title} quality={95} className='
+        <Image src={imageUrl} alt={title} quality={100} className='
         absolute 
         hidden
-        sm:block
+        md:block
         top-8 
         -right-40
         -mr-6 

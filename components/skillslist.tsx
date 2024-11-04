@@ -3,7 +3,7 @@
 import React from 'react';
 import { skillsData } from '@/lib/data';
 import { FaPython, FaDatabase, FaReact, FaNodeJs, FaGitAlt, FaBootstrap, FaHtml5, FaCss3Alt, FaJava } from 'react-icons/fa';
-import { SiPandas, SiFlask, SiJavascript, SiTypescript, SiExpress, SiKotlin, SiJetpackcompose } from 'react-icons/si';
+import { SiPandas, SiFlask, SiJavascript, SiTypescript, SiExpress, SiKotlin, SiJetpackcompose, SiPytorch } from 'react-icons/si';
 import { RiNextjsLine, RiTailwindCssFill } from 'react-icons/ri';
 import { FiFramer } from 'react-icons/fi';
 import { delay, motion } from 'framer-motion';
@@ -42,6 +42,7 @@ const iconComponents = {
     FaJava,
     SiKotlin,
     SiJetpackcompose,
+    SiPytorch,
 };
 
 export default function SkillsList() {

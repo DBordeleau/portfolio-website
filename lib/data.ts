@@ -3,6 +3,7 @@ import { LuGraduationCap } from "react-icons/lu";
 import sprandomizerImg from "@/public/sprandomizer.jpeg";
 import portfoliositeImg from "@/public/portfoliositescreenshot.png";
 import comingsoonpicImg from '@/public/comingsoonpic.png';
+import facemaskappImg from '@/public/facemaskappgif.gif'
 
 
 export const links = [
@@ -44,7 +45,7 @@ export const projectsData = [
         title: "Portfolio Website",
         description:
             "This is a Next.js app I made to host my portfolio projects and help me connect with recruiters for internship opportunities. The website is a single page composed of react components I wrote and styled with Tailwind. Framer is used to animate components. You are viewing the live demo right now.",
-        tags: ["TypeScript", "React", "Next.js", "Tailwind", "Framer Motion", "Git"],
+        tags: ["TypeScript", "React", "Next.js", "Tailwind", "Framer Motion"],
         imageUrl: portfoliositeImg,
         demoLink: '',
         githubLink: 'https://github.com/DBordeleau/portfolio-website',
@@ -53,16 +54,16 @@ export const projectsData = [
         title: "South Park Randomizer",
         description:
             "This is a web app that fetches random South Park episodes via the OMDB API. I built it using React, Tailwind and Express. The website features a dark mode toggle and the ability to filter out already seen episodes. The seen episode list has some entry and exit animations I wrote using framer motion.",
-        tags: ["TypeScript", "Express.js", "Tailwind", "React", "Framer Motion", "Git"],
+        tags: ["TypeScript", "Express.js", "Tailwind", "React", "Framer Motion"],
         imageUrl: sprandomizerImg,
         demoLink: 'https://southparkrandomizer.com/',
         githubLink: 'https://github.com/DBordeleau/south-park-randomizer-react',
     },
     {
-        title: "Machine Learning App",
-        description: "Coming soon!",
-        tags: ["Python", "Django", "TensorFlow", "React", "SQL", "Tailwind", "Git"],
-        imageUrl: comingsoonpicImg,
+        title: "Face Mask Detection AI",
+        description: "This is a two phase project I'm working on where I trained an AI to detect whether or not someone is wearing a face mask using a convolutional neural network. After training the model I built a simple API using Flask that allows the model to be deployed to the web to receive requests. The project includes a simple front-end where users can upload images for the model to make predictions about. I will be deploying the web app soon!",
+        tags: ["Python", "PyTorch", "Flask", "JavaScript", "Tailwind"],
+        imageUrl: facemaskappImg,
         demoLink: '',
         githubLink: '',
     },
@@ -99,6 +100,7 @@ export const skillsData = [
     { name: "Python", icon: "FaPython" },
     { name: "Pandas", icon: "SiPandas" },
     { name: "Flask", icon: "SiFlask" },
+    { name: "PyTorch", icon: "SiPytorch" },
     { name: "React", icon: "FaReact" },
     { name: "JavaScript", icon: "SiJavascript" },
     { name: "TypeScript", icon: "SiTypescript" },
