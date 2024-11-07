@@ -2,7 +2,7 @@ import React from "react";
 import { LuGraduationCap } from "react-icons/lu";
 import sprandomizerImg from "@/public/sprandomizer.jpeg";
 import portfoliositeImg from "@/public/portfoliositescreenshot.png";
-import comingsoonpicImg from '@/public/comingsoonpic.png';
+import comingsoonImg from '@/public/smallcomingsoonbanner.png';
 import facemaskappImg from '@/public/facemaskappgif.gif'
 
 
@@ -65,11 +65,11 @@ export const projectsData = [
     },
     {
         title: "Face Mask Detection AI",
-        description: "This is a two phase project I'm working on where I trained an AI to detect whether or not someone is wearing a face mask using a convolutional neural network. After training the model I built a simple API using Flask that allows the model to be deployed to the web to receive requests. The project includes a simple front-end where users can upload images for the model to make predictions about. I will be deploying the web app soon!",
-        tags: ["Python", "PyTorch", "Flask", "JavaScript", "Tailwind"],
+        description: "This is a two phase project I'm working on where I trained an AI to detect whether or not someone is wearing a face mask using a convolutional neural network. After training the model I built a simple API using Flask that allows the model to be deployed to the web to receive requests. The project includes a simple front-end where users can upload images for the model to make predictions about. Please note the live demo may take some time to respond as a limitation of the free hosting.",
+        tags: ["Python", "PyTorch", "Flask", "JavaScript"],
         imageUrl: facemaskappImg,
-        demoLink: '',
-        githubLink: '',
+        demoLink: 'https://face-mask-detection-qzwb.onrender.com/',
+        githubLink: 'https://github.com/DBordeleau/face-mask-detection',
     },
     /*
     {
