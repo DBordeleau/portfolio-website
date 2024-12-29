@@ -2,8 +2,8 @@ import React from "react";
 import { LuGraduationCap } from "react-icons/lu";
 import sprandomizerImg from "@/public/sprandomizer.jpeg";
 import portfoliositeImg from "@/public/portfoliositescreenshot.png";
-import comingsoonImg from '@/public/smallcomingsoonbanner.png';
 import facemaskappImg from '@/public/facemaskappgif.gif'
+import yofhldbImg from '@/public/yofhldbscreenshot.png'
 
 
 export const links = [
@@ -46,13 +46,12 @@ export const experiencesData = [
 
 export const projectsData = [
     {
-        title: "Portfolio Website",
-        description:
-            "This is a Next.js app I made to host my portfolio projects and help me connect with recruiters for internship opportunities. The website is a single page composed of react components I wrote and styled with Tailwind. Framer is used to animate components. You are viewing the live demo right now.",
-        tags: ["TypeScript", "React", "Next.js", "Tailwind", "Framer Motion"],
-        imageUrl: portfoliositeImg,
-        demoLink: '',
-        githubLink: 'https://github.com/DBordeleau/portfolio-website',
+        title: "Fantasy Hockey Database App",
+        description: "This is a Next.js app that allows users to make requests to a PostgreSQL database and view historical league data for a fantasy hockey league. I built the database myself and imported the fantasy stats with Python/Pandas. The website uses dynamic URLs to fetch appropriate data from the database.",
+        tags: ["TypeScript", "React", "Next.js", "SQL", "PostgreSQL", "Prisma", "Tailwind"],
+        imageUrl: yofhldbImg,
+        demoLink: 'https://yofhl-db.vercel.app',
+        githubLink: 'https://github.com/DBordeleau/yofhl_db',
     },
     {
         title: "South Park Randomizer",
@@ -71,15 +70,16 @@ export const projectsData = [
         demoLink: 'https://face-mask-detection-qzwb.onrender.com/',
         githubLink: 'https://github.com/DBordeleau/face-mask-detection',
     },
-    /*
     {
-        title: "Pandas/Data Manipulation App",
-        description: "This is a app I made with Python, Pandas and Django that organizes and dynamically displays fantasy hockey information from a SQL database."
-        tags: ["Python", "Pandas", "Django", "React", "SQL", "Tailwind", "HTML", "Git"],
-        imageUrl: datawebsiteImg,
+        title: "Portfolio Website",
+        description:
+            "This is a Next.js app I made to host my portfolio projects and help me connect with recruiters for internship opportunities. The website is a single page composed of react components I wrote and styled with Tailwind. Framer is used to animate components. You are viewing the live demo right now.",
+        tags: ["TypeScript", "React", "Next.js", "Tailwind", "Framer Motion"],
+        imageUrl: portfoliositeImg,
         demoLink: '',
-        githubLink: '',
+        githubLink: 'https://github.com/DBordeleau/portfolio-website',
     },
+    /*
     {
         title: "Blog/Social Media Clone",
         description: "This is a Node.js app I made using React and Tailwind CSS. The site features account registration, login authentication, and has the ability for users to make posts and attach images to them."
@@ -110,14 +110,13 @@ export const skillsData = [
     { name: "TypeScript", icon: "SiTypescript" },
     { name: "Next.js", icon: "RiNextjsLine" },
     { name: "Node.js", icon: "FaNodeJs" },
-    { name: "Express", icon: "SiExpress" },
     { name: "SQL", icon: "FaDatabase" },
+    { name: "PostgreSQL", icon: "SiPostgresql" },
+    { name: "Prisma", icon: "SiPrisma" },
     { name: "Git", icon: "FaGitAlt" },
     { name: "Tailwind", icon: "RiTailwindCssFill" },
     { name: "Framer", icon: "FiFramer" },
     { name: "Bootstrap", icon: "FaBootstrap" },
-    { name: "HTML", icon: "FaHtml5" },
-    { name: "CSS", icon: "FaCss3Alt" },
     { name: "Java", icon: "FaJava" },
     { name: "Kotlin", icon: "SiKotlin" },
     { name: "Jetpack Compose", icon: "SiJetpackcompose" },

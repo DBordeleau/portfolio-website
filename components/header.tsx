@@ -28,10 +28,12 @@ export default function Header() {
           shadow-black/[0.03] 
           backdrop-blur-[0.5rem]
           min-h-[5rem]
-          sm:top-6 
+          sm:top-2 
+          md:top-2
+          lg:top-4
           lg:min-h-[4rem]
-          sm:w-[30rem]
-          md:w-[30rem]
+          sm:w-[34rem]
+          md:w-[34rem]
           lg:w-[34rem]
           sm:rounded-full
           dark:bg-gray-950
@@ -40,9 +42,9 @@ export default function Header() {
         initial={{ y: -100, x: "-50%", opacity: 0 }}
         animate={{ y: 0, x: "-50%", opacity: 1 }}
       ></motion.div>
-      
-      <nav className="flex fixed top-[0.15rem] left-1/2 -translate-x-1/2 sm:top-[1.7rem] sm:py-1 md:py-2 lg:py-3 xl:py-3">
-        <ul className="flex flex-wrap justify-center gap-x-4 lg:gap-x-2 text-[0.8rem] font-medium text-gray-500">
+
+      <nav className="flex fixed top-[0.5rem] left-1/2 text-[0.7rem] md:text-[.85rem] md:w-full justify-center -translate-x-1/2 md:top-[1.25rem] sm:py-1 md:py-2 lg:py-3 xl:py-3">
+        <ul className="flex flex-wrap justify-center gap-x-3 lg:gap-x-2 font-medium text-gray-500">
           {links.map(link => (
             <motion.li
               className="relative flex justify-center"
@@ -64,9 +66,9 @@ export default function Header() {
                 {link.name === activeSection && (
                   <motion.span
                     className="absolute bg-gray-200 rounded-full -z-10 dark:bg-gray-800"
-                    style={{ 
-                      width: "calc(100% + 12px)", // Fit within link item
-                      height: "calc(100%)" // Adjusts to cover taller wrapped text
+                    style={{
+                      width: "calc(100% + 12px)", // make sure the highlighter covers the whole link
+                      height: "calc(100%)"
                     }}
                     layoutId="activeSection"
                     transition={{
@@ -81,21 +83,6 @@ export default function Header() {
           ))}
         </ul>
       </nav>
-
-      <style jsx>{`
-        @media (max-width: 640px) {x
-          header nav ul {
-            font-size: 1rem; // Slightly smaller font on smaller screens
-          }
-          header {
-            min-height: 5.5rem; // Slightly taller header on smaller screens
-          }
-          .link-wrapper {
-            padding-left: 4px;
-            padding-right: 4px; // Less padding per link on smaller screens
-          }
-        }
-      `}</style>
     </header>
   );
 }
