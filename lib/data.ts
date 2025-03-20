@@ -113,11 +113,10 @@ export const skillsData = [
     { name: "SQL", icon: "FaDatabase" },
     { name: "PostgreSQL", icon: "SiPostgresql" },
     { name: "Prisma", icon: "SiPrisma" },
+    { name: "Supabase", icon: "SiSupabase" },
     { name: "Git", icon: "FaGitAlt" },
     { name: "Tailwind", icon: "RiTailwindCssFill" },
     { name: "Framer", icon: "FiFramer" },
-    { name: "Bootstrap", icon: "FaBootstrap" },
     { name: "Java", icon: "FaJava" },
     { name: "Kotlin", icon: "SiKotlin" },
-    { name: "Jetpack Compose", icon: "SiJetpackcompose" },
 ] as const;

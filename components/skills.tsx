@@ -6,7 +6,7 @@ import SectionHeader from './section-header';
 import { useSectionInView } from '@/lib/hooks';
 
 export default function Skills() {
-    const { ref } = useSectionInView('Skills')
+  const { ref } = useSectionInView('Skills', 1)
   return (
     <section ref={ref} id="skills" className="mb-32 max-w-[60rem] scroll-mt-28 text-center">
       <div>

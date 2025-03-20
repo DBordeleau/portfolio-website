@@ -20,11 +20,10 @@ export default function About() {
         I've enjoyed solving problems with software since my early teens but I had never formally studied computer science.
         I <span className="font-bold">enrolled full-time at Carleton University</span> in the fall of 2024 and have been studying full-time since.
         In addition to my coursework, I have been learning front-end development and working on some independent projects
-        in my free time. I'm seeking {" "}
+        in my free time. I'm looking for {" "}
         <span className="font-bold">
-          full-time internship opportunities for Summer 2025 where I can continue to develop my skills and excel as an important part of your team. {" "}
+          part-time internship opportunities ahead of my May 2026 graduation where I can continue to develop my skills and excel as an important part of your team. {" "}
         </span>
-        I am also interested in part-time opportunities ahead of the summer.
       </p>
 
       <p className='text-[1.05rem] sm:text-[1.25rem]'>

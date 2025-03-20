@@ -23,6 +23,11 @@ export default function CurrentProject() {
       <p className='mb-3 text-[1rem]'>
         I'm nearly finished with a battery powered wifi thermometer I built using a Raspberry Pi Pico W. I wrote all the microcontroller code in C++. I'll be uploading the project to github soon along with a demo video.
       </p>
+
+      <h3 className='text-[1.25rem] font-bold underline mb-2'>Project Collaboration App</h3>
+      <p className='mb-3 text-[1rem]'>
+        I'm working on a web app that will cater to students and young professionals looking to build more ambitious projects for their portfolios. This app started as a demo I built with some friends at uOttaHack7. I'm building the app with Next.js and Supabase.
+      </p>
     </motion.section>
   )
 }
