@@ -70,6 +70,8 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
             case 'please':
             case 'help please':
                 output = 'Since you asked nicely, here are some commands you can try:\n' +
+                    "• clear - Clears terminal commands\n" +
+                    "• exit - Quits terminal\n" +
                     "• ascii - Show ASCII art\n" +
                     "• joke - Tell a programming joke\n" +
                     "• flip - Flip a coin\n" +
