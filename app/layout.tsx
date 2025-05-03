@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import Footer from "@/components/footer";
 import ThemeToggle from "@/components/themeToggle";
 import ThemeContextProvider from "@/context/theme-context";
+import KonamiTerminalWrapper from "@/components/terminalwrapper";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -34,6 +35,7 @@ export default function RootLayout({
             <Toaster position="bottom-center" />
             <Footer />
             <ThemeToggle />
+            <KonamiTerminalWrapper />
           </ActiveSectionContextProvider>
         </ThemeContextProvider>
       </body>

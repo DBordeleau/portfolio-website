@@ -4,6 +4,7 @@ import Intro from "@/components/intro";
 import Projects from "@/components/projects";
 import Skills from "@/components/skills";
 import Contact from "@/components/contact";
+
 import CurrentProject from "@/components/currentproject";
 
 export default function Home() {
