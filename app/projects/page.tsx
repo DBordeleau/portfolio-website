@@ -9,7 +9,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 // For ordering filters
-// For ordering filters
 const tagPriority: Record<string, number> = {
     "TypeScript": 1,
     "React": 2,

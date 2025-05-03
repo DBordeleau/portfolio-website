@@ -64,7 +64,7 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
 
         switch (command) {
             case 'help':
-                output = 'Just kidding! This is an ~secret~ terminal. Go hunting for your own commands! Though maybe if you asked nicely...';
+                output = 'Just kidding! This is a ~secret~ terminal. Go hunting for your own commands! Though maybe if you asked nicely...';
                 break;
             case 'please help':
             case 'please':
@@ -87,6 +87,9 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
                 return;
             case 'matrix':
                 output = generateMatrixEffect();
+                break;
+            case 'cam':
+                output = 'theman3245';
                 break;
             case 'fortune':
                 const fortunes = [
@@ -193,7 +196,7 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
                     sessionStorage.getItem('waitingForPassword') === 'true') {
                     output = `<span class="text-yellow-300">The glyphs on the door glow brightly as you speak the word. With a rumbling sound, the massive stone door slides open, revealing a pathway to freedom.</span>
                 
-                Congratulations! You've escaped the adventure. Type 'adventure' to play again.`;
+                Congratulations! You've escaped the adventure.`;
                     sessionStorage.setItem('doorSolved', 'true');
                     sessionStorage.setItem('adventureRoom', 'exit');
                     sessionStorage.removeItem('waitingForPassword');
