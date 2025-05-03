@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <head>
-      <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={`${inter.className} bg-gray-50 text-gray-950 relative pt-28 sm:pt-36 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90 transition-all`}>
         <div className="bg-blue-100 absolute -z-10 top-[-6rem] sm:right-[1rem] right-[1rem] h-[50rem] w-[10rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-sky-800 dark:w-[10rem] dark:h-[30rem] dark:top-[5rem] sm:dark:right-[13rem] dark:right-[1rem] sm:dark:w-[55rem] sm:dark:h-[45rem]"></div>
@@ -31,7 +31,7 @@ export default function RootLayout({
           <ActiveSectionContextProvider>
             <Header />
             {children}
-            <Toaster position="bottom-center"/>
+            <Toaster position="bottom-center" />
             <Footer />
             <ThemeToggle />
           </ActiveSectionContextProvider>

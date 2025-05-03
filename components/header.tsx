@@ -6,9 +6,15 @@ import { links } from '@/lib/data';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { useActiveSectionContext } from '@/context/active-section-context';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const { activeSection, setActiveSection, setLastClickTime } = useActiveSectionContext();
+  const pathname = usePathname();
+
+  if (pathname.startsWith('/projects/')) {
+    return null;
+  }
 
   return (
     <header className="z-[999] relative overflow-hidden w-full max-w-full">
@@ -67,7 +73,7 @@ export default function Header() {
                   <motion.span
                     className="absolute bg-gray-200 rounded-full -z-10 dark:bg-gray-800"
                     style={{
-                      width: "calc(100% + 12px)", // make sure the highlighter covers the whole link
+                      width: "calc(100% + 12px)",
                       height: "calc(100%)"
                     }}
                     layoutId="activeSection"

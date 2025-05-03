@@ -9,3 +9,49 @@
 .flowey {
     color: yellow
 }
+
+/* Add to your globals.css */
+.markdown-body {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.markdown-body img {
+    max-width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+}
+
+.markdown-body table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+    border: 1px solid #dfe2e5;
+    padding: 6px 13px;
+}
+
+.dark .markdown-body table th,
+.dark .markdown-body table td {
+    border-color: #404040;
+}
+
+.markdown-body pre {
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    padding: 16px;
+    overflow: auto;
+}
+
+.dark .markdown-body pre {
+    background-color: #1e1e1e;
+}
