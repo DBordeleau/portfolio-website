@@ -6,7 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { projectsData } from '@/lib/data';
-import { FaArrowLeft, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaArrowLeft, FaGithub, FaExternalLinkAlt, FaHome } from 'react-icons/fa';
+import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import MarkdownRenderer from '@/components/markdownrenderer';
 import { fetchReadme } from '@/lib/utils';
 
@@ -70,12 +71,23 @@ export default function ProjectPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <Link
-                        href="/#projects"
-                        className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-8 transition-colors"
-                    >
-                        <FaArrowLeft className="mr-2" /> Back to projects
-                    </Link>
+                    <div className="flex items-center mb-8 gap-4">
+                        <Link
+                            href="/#projects"
+                            className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
+                        >
+                            <FaHome className="mr-2" /> Home
+                        </Link>
+
+                        <span className="text-gray-400 dark:text-gray-600">|</span>
+
+                        <Link
+                            href="/projects"
+                            className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
+                        >
+                            <BsFillGrid3X3GapFill className="mr-2" /> All Projects
+                        </Link>
+                    </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
                         <div className="lg:col-span-2">

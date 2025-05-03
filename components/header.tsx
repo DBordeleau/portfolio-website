@@ -12,7 +12,7 @@ export default function Header() {
   const { activeSection, setActiveSection, setLastClickTime } = useActiveSectionContext();
   const pathname = usePathname();
 
-  if (pathname.startsWith('/projects/')) {
+  if (pathname.startsWith('/projects')) {
     return null;
   }
 

@@ -13,8 +13,6 @@ export default function Home() {
     <About />
     <Projects />
     <Skills />
-    <CurrentProject />
-    <Divider />
     <Contact />
   </main>;
 }

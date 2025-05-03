@@ -46,10 +46,28 @@ export const experiencesData = [
 
 export const projectsData = [
     {
+        title: "Face Mask Detection AI",
+        slug: "face-mask-detection",
+        description: "This is a two phase project I'm working on where I trained an AI to detect whether or not someone is wearing a face mask using a convolutional neural network. After training the model I built a simple API using Flask that allows the model to be deployed to the web to receive requests. The project includes a simple front-end where users can upload images for the model to make predictions about. Please note the live demo may take some time to respond as a limitation of the free hosting.",
+        tags: ["Python", "PyTorch", "Flask", "JavaScript"],
+        imageUrl: facemaskappImg,
+        demoLink: 'https://face-mask-detection-qzwb.onrender.com/',
+        githubLink: 'https://github.com/DBordeleau/face-mask-detection',
+        githubOwner: 'DBordeleau',
+        features: [
+            "CNN image classification model I trained using PyTorch.",
+            "Flask web interface that allows users to upload images and request predictions from the model.",
+        ],
+        learningOutcomes: [
+            "Trained a convolutional neural network on a Kaggle dataset (already cleaned). My training process involved data augmentation, hyperparameter tuning and model evaluation.",
+            "Built and deployed a Flask app that allows users to upload images for the model to make predictions about.",
+        ]
+    },
+    {
         title: "Fantasy Hockey Database App",
         slug: "yofhl-db",
         description: "This is a Next.js app that allows users to make requests to a PostgreSQL database and view historical league data for a fantasy hockey league. I built the database myself and imported the fantasy stats with Python/Pandas. The website uses dynamic URLs to fetch appropriate data from the database.",
-        tags: ["TypeScript", "React", "Next.js", "SQL", "PostgreSQL", "Prisma", "Tailwind"],
+        tags: ["TypeScript", "React", "Next.js", "SQL", "PostgreSQL", "Prisma", "Tailwind", "Framer"],
         imageUrl: yofhldbImg,
         demoLink: 'https://yofhl-db.vercel.app',
         githubLink: 'https://github.com/DBordeleau/yofhl_db',
@@ -75,7 +93,7 @@ export const projectsData = [
         slug: "south-park-randomizer",
         description:
             "This is a web app that fetches random South Park episodes via the OMDB API. I built it using React, Tailwind and Express. The website features a dark mode toggle and the ability to filter out already seen episodes. The seen episode list has some entry and exit animations I wrote using framer motion.",
-        tags: ["TypeScript", "Express.js", "Tailwind", "React", "Framer Motion"],
+        tags: ["TypeScript", "Next.js", "Tailwind", "React", "Framer"],
         imageUrl: sprandomizerImg,
         demoLink: 'https://southparkrandomizer.com/',
         githubLink: 'https://github.com/DBordeleau/south-park-randomizer-react',
@@ -92,29 +110,11 @@ export const projectsData = [
         ]
     },
     {
-        title: "Face Mask Detection AI",
-        slug: "face-mask-detection",
-        description: "This is a two phase project I'm working on where I trained an AI to detect whether or not someone is wearing a face mask using a convolutional neural network. After training the model I built a simple API using Flask that allows the model to be deployed to the web to receive requests. The project includes a simple front-end where users can upload images for the model to make predictions about. Please note the live demo may take some time to respond as a limitation of the free hosting.",
-        tags: ["Python", "PyTorch", "Flask", "JavaScript"],
-        imageUrl: facemaskappImg,
-        demoLink: 'https://face-mask-detection-qzwb.onrender.com/',
-        githubLink: 'https://github.com/DBordeleau/face-mask-detection',
-        githubOwner: 'DBordeleau',
-        features: [
-            "CNN image classification model I trained using PyTorch.",
-            "Flask web interface that allows users to upload images and request predictions from the model.",
-        ],
-        learningOutcomes: [
-            "Trained a convolutional neural network on a Kaggle dataset (already cleaned). My training process involved data augmentation, hyperparameter tuning and model evaluation.",
-            "Built and deployed a Flask app that allows users to upload images for the model to make predictions about.",
-        ]
-    },
-    {
         title: "Portfolio Website",
         slug: "portfolio-website",
         description:
             "This is a Next.js app I made to host my portfolio projects and help me connect with recruiters for internship opportunities. The website is a single page composed of react components I wrote and styled with Tailwind. Framer is used to animate components. You are viewing the live demo right now.",
-        tags: ["TypeScript", "React", "Next.js", "Tailwind", "Framer Motion"],
+        tags: ["TypeScript", "React", "Next.js", "Tailwind", "Framer"],
         imageUrl: portfoliositeImg,
         demoLink: '',
         githubLink: 'https://github.com/DBordeleau/portfolio-website',
