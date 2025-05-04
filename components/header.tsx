@@ -35,14 +35,14 @@ export default function Header() {
           shadow-lg 
           shadow-black/[0.03] 
           backdrop-blur-[0.5rem]
-          min-h-[5rem]
+          min-h-[3rem]
           sm:top-2 
           md:top-2
           lg:top-4
           lg:min-h-[4rem]
-          sm:w-[28rem]
-          md:w-[28rem]
-          lg:w-[28rem]
+          sm:w-[26rem]
+          md:w-[26rem]
+          lg:w-[26rem]
           sm:rounded-full
           dark:bg-gray-950
           dark:border-black/40
