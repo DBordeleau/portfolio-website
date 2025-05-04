@@ -7,6 +7,8 @@ import Footer from "@/components/footer";
 import ThemeToggle from "@/components/themeToggle";
 import ThemeContextProvider from "@/context/theme-context";
 import KonamiTerminalWrapper from "@/components/terminalwrapper";
+import { DeletionEffectProvider } from '@/context/deletionsimulationcontext';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,15 +32,17 @@ export default function RootLayout({
         <div className="bg-emerald-100 absolute -z-10 top-[-1rem] sm:left-[4rem] h-[50rem] w-[10rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-emerald-800 dark:w-[10rem] dark:h-[30rem] dark:top-[5rem] sm:dark:w-[55rem] sm:dark:h-[45rem] sm:dark:left-[10rem]"></div>
         <ThemeContextProvider>
           <ActiveSectionContextProvider>
-            <Header />
-            {children}
-            <Toaster position="bottom-center" />
-            <Footer />
-            <ThemeToggle />
-            <KonamiTerminalWrapper />
+            <DeletionEffectProvider>
+              <Header />
+              {children}
+              <Toaster position="bottom-center" />
+              <Footer />
+              <ThemeToggle />
+              <KonamiTerminalWrapper />
+            </DeletionEffectProvider>
           </ActiveSectionContextProvider>
         </ThemeContextProvider>
       </body>
-    </html>
+    </html >
   )
 }

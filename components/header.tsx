@@ -7,17 +7,19 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { useActiveSectionContext } from '@/context/active-section-context';
 import { usePathname } from 'next/navigation';
+import { useDeletionEffect } from '@/context/deletionsimulationcontext';
 
 export default function Header() {
   const { activeSection, setActiveSection, setLastClickTime } = useActiveSectionContext();
   const pathname = usePathname();
+  const { isDeletionActive } = useDeletionEffect();
 
-  if (pathname.startsWith('/projects')) {
+  if (pathname.startsWith('/projects') || isDeletionActive) {
     return null;
   }
 
   return (
-    <header className="z-[999] relative overflow-hidden w-full max-w-full">
+    <header className="z-[999] relative overflow-hidden w-fit max-w-full">
       <motion.div
         className="
           fixed 
@@ -38,9 +40,9 @@ export default function Header() {
           md:top-2
           lg:top-4
           lg:min-h-[4rem]
-          sm:w-[34rem]
-          md:w-[34rem]
-          lg:w-[34rem]
+          sm:w-[28rem]
+          md:w-[28rem]
+          lg:w-[28rem]
           sm:rounded-full
           dark:bg-gray-950
           dark:border-black/40

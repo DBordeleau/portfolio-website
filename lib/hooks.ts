@@ -42,17 +42,11 @@ export function useKonamiCode() {
 
       if (isKonamiCode) {
         setKonamiActivated(true);
-
-        // Optional: play a sound effect
-        // const audio = new Audio('/easter-egg-audio.wav');
-        // audio.play().catch(e => console.log('Audio play failed:', e));
       }
     };
 
-    // Add the event listener
     window.addEventListener('keydown', keyHandler);
 
-    // Clean up
     return () => {
       window.removeEventListener('keydown', keyHandler);
     };

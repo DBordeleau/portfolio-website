@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { useSectionInView } from '@/lib/hooks';
 
 export default function About() {
-  const { ref } = useSectionInView('About');
+  const { ref } = useSectionInView('About', .9);
 
   return (
     <motion.section ref={ref} className='mb-28 max-w-[45rem] text-center leading-8 sm:mb-40 scroll-mt-28'

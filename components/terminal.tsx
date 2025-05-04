@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { FaTerminal, FaTimes } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useDeletionEffect } from '@/context/deletionsimulationcontext';
+import { MatrixEffect } from './matrixeffect';
 
 interface TerminalProps {
     isVisible: boolean;
@@ -10,8 +12,9 @@ interface TerminalProps {
 }
 
 type CommandHistory = {
+    id?: string;
     command: string;
-    output: string;
+    output: string | React.ReactNode;
 };
 
 export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
@@ -20,6 +23,11 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
     const [cursorVisible, setCursorVisible] = useState(true);
     const inputRef = useRef<HTMLInputElement>(null);
     const terminalRef = useRef<HTMLDivElement>(null);
+    const [historyPosition, setHistoryPosition] = useState(-1);
+    const [tempInput, setTempInput] = useState('');
+    const [fakeDeleteActive, setFakeDeleteActive] = useState(false);
+    const [deleteProgress, setDeleteProgress] = useState<string[]>([]);
+    const { setDeletionActive } = useDeletionEffect();
 
     useEffect(() => {
         if (isVisible && inputRef.current) {
@@ -27,7 +35,6 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
         }
     }, [isVisible]);
 
-    // Blinking cursor effect
     useEffect(() => {
         const interval = setInterval(() => {
             setCursorVisible(prev => !prev);
@@ -41,18 +48,113 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
         }
     }, [commandHistory]);
 
-    function generateMatrixEffect() {
-        let output = "";
-        const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        for (let i = 0; i < 15; i++) {
-            let line = "";
-            for (let j = 0; j < 40; j++) {
-                line += chars[Math.floor(Math.random() * chars.length)];
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        const commands = commandHistory.map(entry => entry.command);
+
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+
+            if (historyPosition === -1 && input) {
+                setTempInput(input);
             }
-            output += `<span style="color: ${i % 2 === 0 ? '#0f0' : '#0a0'};">${line}</span>\n`;
+
+            if (commands.length > 0 && historyPosition < commands.length - 1) {
+                const newPosition = historyPosition + 1;
+                setHistoryPosition(newPosition);
+                setInput(commands[commands.length - 1 - newPosition]);
+            }
         }
-        return output;
+        else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+
+            if (historyPosition > 0) {
+                const newPosition = historyPosition - 1;
+                setHistoryPosition(newPosition);
+                setInput(commands[commands.length - 1 - newPosition]);
+            }
+            else if (historyPosition === 0) {
+                setHistoryPosition(-1);
+                setInput(tempInput);
+                setTempInput('');
+            }
+        }
+    };
+
+    function calculateUptime() {
+        // website launch date: October 28, 2024
+        const launchDate = new Date('2024-10-28T00:00:00');
+        const currentDate = new Date();
+
+        const diffTime = Math.abs(currentDate.getTime() - launchDate.getTime());
+
+        // Convert to days (86400000 = 24 * 60 * 60 * 1000)
+        const diffDays = Math.floor(diffTime / 86400000);
+
+        return diffDays;
     }
+
+    const simulateDeletion = useCallback(() => {
+        setDeletionActive(true);
+
+        setTimeout(() => {
+            setFakeDeleteActive(true);
+
+            setTimeout(() => {
+                const files = [
+                    '/index.html',
+                    '/styles.css',
+                    '/components/*',
+                    '/pages/*',
+                    '/api/*',
+                    '/public/*',
+                    '/node_modules (this might take a while...)',
+                    '/.next/',
+                    '/package.json',
+                    '/README.md',
+                    '/context/*',
+                    '/.git',
+                    '/lib/utils/*',
+                    '/lib/hooks/*'
+                ];
+
+                let i = 0;
+                const deleteFile = () => {
+                    if (i < files.length - 1) {
+                        const isNodeModules = files[i].includes('public');
+                        setDeleteProgress(prev => [...prev, `Deleting ${files[i]}...`]);
+                        i++;
+
+                        const nextDelay = isNodeModules ? 2500 : 500;
+                        setTimeout(deleteFile, nextDelay);
+                    } else {
+                        setDeleteProgress(prev => [...prev, 'All files deleted successfully!']);
+                        setTimeout(() => {
+                            setDeleteProgress(prev => [...prev, 'Application shutting down...']);
+
+                            setTimeout(() => {
+                                setDeleteProgress(prev => [...prev, '__BLACKOUT__']);
+
+                                setTimeout(() => {
+                                    setDeleteProgress(prev => [...prev, '__JUST_KIDDING__']);
+
+                                    setTimeout(() => {
+                                        setDeleteProgress(prev => [...prev, '__FADEOUT__']);
+
+                                        setTimeout(() => {
+                                            setFakeDeleteActive(false);
+                                            setDeleteProgress([]);
+                                            setDeletionActive(false);
+                                        }, 1500);
+                                    }, 500);
+                                }, 3000);
+                            }, 2000);
+                        }, 1000);
+                    }
+                };
+                deleteFile();
+            }, 1000);
+        }, 1000);
+    }, [setDeletionActive]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -63,6 +165,71 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
         const command = input.trim().toLowerCase();
 
         switch (command) {
+            case 'neofetch':
+                const uptimeDays = calculateUptime();
+                output = `
+  <div class="flex flex-col md:flex-row">
+    <div class="md:mr-8 text-yellow-400 whitespace-pre">            
+            /\\
+           /  \\
+          /    \\
+         /      \\
+        /________\\
+       /\\        /\\
+      /  \\      /  \\
+     /    \\    /    \\
+    /      \\  /      \\
+   /________\\/________\\</div>
+   
+    <div class="whitespace-pre flex flex-col">
+      <div>
+        <span class="text-green-400">guest@dillons-portfolio</span>
+        <span class="text-green-400">----------------------</span>
+        <span class="text-blue-400">OS:</span> This is a React app
+        <span class="text-blue-400">Uptime:</span> ${uptimeDays} days
+        <span class="text-blue-400">Host:</span> Vercel❤️
+        <span class="text-blue-400">Kernel:</span> React.js ${Math.floor(Math.random() * 5) + 16}.${Math.floor(Math.random() * 9)}.${Math.floor(Math.random() * 9)}
+        <span class="text-blue-400">Shell:</span> Terminal.tsx
+        <span class="text-blue-400">Theme:</span> Hyrule Dark
+        <span class="text-blue-400">CPU:</span> Vercel Cloud 999.99GHz
+        <span class="text-blue-400">Memory:</span> Running out 
+        <span class="text-blue-400">GitHub:</span> github.com/DBordeleau
+      </div>
+      
+      <div class="mt-2">
+        <div class="flex">
+          <div class="w-6 h-6 bg-black border border-gray-600"></div>
+          <div class="w-6 h-6 bg-red-600"></div>
+          <div class="w-6 h-6 bg-green-500"></div>
+          <div class="w-6 h-6 bg-yellow-400"></div>
+          <div class="w-6 h-6 bg-blue-500"></div>
+          <div class="w-6 h-6 bg-purple-500"></div>
+          <div class="w-6 h-6 bg-cyan-400"></div>
+          <div class="w-6 h-6 bg-white"></div>
+        </div>
+        <div class="flex -mt-[2.5rem]">
+          <div class="w-6 h-6 bg-gray-600"></div>
+          <div class="w-6 h-6 bg-red-400"></div>
+          <div class="w-6 h-6 bg-green-400"></div>
+          <div class="w-6 h-6 bg-yellow-300"></div>
+          <div class="w-6 h-6 bg-blue-400"></div>
+          <div class="w-6 h-6 bg-purple-400"></div>
+          <div class="w-6 h-6 bg-cyan-300"></div>
+          <div class="w-6 h-6 bg-gray-100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+                break;
+            case 'rm -rf /':
+            case 'rm -rf /*':
+            case 'rm -rf .':
+            case 'rm -rf ./':
+            case 'rm -rf *':
+                simulateDeletion();
+                output = 'Initiating complete filesystem deletion...';
+                break;
             case 'help':
                 output = 'Just kidding! This is a ~secret~ terminal. Go hunting for your own commands! Though maybe if you asked nicely...';
                 break;
@@ -84,12 +251,32 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
                 setCommandHistory([]);
                 setInput('');
                 return;
+            case 'thebladegamer':
+                output = 'Night Brian'
+                break;
             case 'exit':
                 onCloseAction();
                 return;
             case 'matrix':
-                output = generateMatrixEffect();
-                break;
+            case 'cmatrix': {
+                const matrixId = `matrix-${Date.now()}`;
+
+                const removeMatrix = () => {
+                    setCommandHistory(prev => prev.filter(item => item.id !== matrixId));
+                };
+
+                const newEntry = {
+                    id: matrixId,
+                    command: input,
+                    output: <MatrixEffect onStop={removeMatrix} />
+                };
+
+                setCommandHistory(prev => [...prev, newEntry]);
+                setInput('');
+                setHistoryPosition(-1);
+                setTempInput('');
+                return;
+            }
             case 'cam':
                 output = 'theman3245';
                 break;
@@ -317,7 +504,123 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
                 output = Math.random() > 0.5 ? "Heads" : "Tails";
                 break;
             case 'sudo':
-                output = "You have no power here.";
+                output = `
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣟⣻⢻⡛⡛⢭⡛⠽⢭⣛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⡝⠶⣡⠳⣌⡱⢣⣙⣵⢮⡬⢇⡱⣩⢞⡴⢛⡳⡛⢿⣿⣿⣿⣿⣻⢯⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⣿⡿⣟⢾⡱⢍⡲⣡⢋⣴⣷⣟⢷⢫⠯⣜⣦⡴⣝⣟⣷⣧⡶⣉⠷⣬⡻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢟⡟⢦⡝⢮⢳⣥⣿⠟⡣⢍⢫⠙⡻⣞⣯⣞⣯⣿⣿⣿⣿⣧⢛⡬⡳⣟⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿
+⣿⣿⣿⣿⣿⣿⣷⣿⣿⣿⡿⣭⢻⣜⡯⢺⡭⢷⡛⢥⢋⠴⣉⠦⣙⠴⡹⢟⡿⣿⣻⢿⣿⣿⣿⣧⡚⡵⡍⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⢻⡾⣱⡿⢎⠾⣩⠜⢦⡙⢬⡞⡿⣞⡶⣽⣚⢧⡽⣜⢣⢏⢮⣱⢟⣿⣿⣷⠱⣝⣲⢟⣿⣿⣿⣿⣿⣿⣷⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣽⣛⡼⣷⡻⢭⢋⢦⡙⢦⡹⢶⣻⣷⣿⣽⣶⢋⡜⣿⣽⣻⡾⣶⣼⡺⣽⣻⣯⣟⣾⠼⣯⣿⣿⣿⣿⣿⣿⣯⣷⣿
+⣿⣿⣿⣿⣿⣿⣽⡟⣦⣋⠿⡔⣉⠦⣩⠶⣭⢳⡝⢺⠳⢯⢟⡛⡅⣎⢾⣿⣿⣷⣿⣽⣳⣯⣶⢿⣜⡿⣞⢯⣟⣷⣿⣿⣿⣿⣿⣽⣿⡿
+⣿⣿⣿⣿⣿⢿⡿⡝⡶⣫⠓⡜⢤⠳⡥⣟⢬⢳⡜⣧⣟⣯⣏⡶⣵⢾⡿⣽⣻⣯⣟⡿⣽⣷⣟⣟⣲⠹⣩⢿⣹⣾⣿⣿⣿⣿⣯⣿⣾⣿
+⣿⣿⣿⣿⣿⣿⡻⣹⡵⢣⡙⡜⢢⡛⢴⡩⢎⢧⢻⣵⡻⣍⣾⣿⣽⣯⣟⣿⢧⣻⣽⣻⣽⣾⣟⡞⣜⡵⣫⢯⢷⣿⣿⣿⣿⣿⣿⣿⢾⣻
+⣿⣿⣿⣿⢏⣷⣳⢣⡜⣡⢓⡸⢡⡙⢦⡙⣎⡎⣿⣺⣿⢷⣻⣞⣷⣻⣿⣻⣯⢷⡾⣽⣻⣾⢯⡽⣎⢷⡹⣮⣳⢻⣿⣿⣿⣿⣿⣿⣟⣿
+⣿⣿⣿⢿⣿⢓⡿⢎⠴⡡⢎⠴⢣⢜⢢⠝⡜⡜⣷⡿⣿⣿⣿⣿⣾⣿⣷⣟⣯⣟⡾⣿⣽⣟⣾⡿⣞⣮⢙⢶⡹⢧⣟⣻⣿⣿⣿⣿⣿⣿
+⡻⢿⣿⡹⢧⡫⠜⣌⠖⡑⣎⢚⡥⢚⡜⣸⢱⡱⢲⡹⢣⣟⣿⡿⣿⣿⢿⣯⢷⣫⣽⢷⣿⣻⣵⣻⣝⡮⣏⡖⢯⡹⡾⣟⣿⣿⣿⣿⣿⣿
+⣽⣞⡶⣿⠳⣴⣛⠼⣸⠵⣎⢣⡜⣱⢊⡵⢪⡑⣧⠻⣝⢮⣟⣿⣷⣿⣻⣿⣞⡵⣯⣿⣿⡿⣿⣷⢯⢷⡹⠜⣧⢳⡽⣽⣿⣿⣿⣿⣿⣿
+⣿⣯⣟⣦⡟⣖⣯⢵⣎⠟⣜⡣⢞⡡⣏⠶⣣⢻⡵⣛⡹⣷⢞⡿⣾⣽⣻⣞⢧⣛⣵⣿⢿⣿⣟⡿⣓⢮⣣⡟⣼⢫⣿⡽⣿⣿⣿⣿⣿⣿
+⡺⣷⣿⣷⢯⣿⣟⣧⡟⡿⢬⡣⢟⡶⣩⢞⡱⣏⢾⣣⢿⡜⣮⣟⡷⣿⣼⣯⠳⣽⢺⡿⣟⣯⣧⣿⣫⢶⡳⣽⢮⣿⣿⣟⣷⣿⣿⣿⣿⣿
+⣿⣿⣽⣾⣻⡽⣞⡴⣻⡵⣯⡽⢫⡼⣱⢫⡵⣏⢾⣡⢿⣹⡳⣾⡟⡷⣯⣟⣻⣾⣹⣿⣿⣿⣟⣳⢯⡷⣿⡽⣷⡝⣮⢟⣿⣿⣿⣿⣿⡟
+⣿⣿⢯⣿⣿⣿⣷⡽⣯⣷⢧⢏⣷⣻⣵⢫⣜⠯⣖⢽⣛⢴⣛⣧⢿⣻⣿⣭⣷⣿⣽⣯⣿⣾⣿⣿⢯⣟⣿⣿⣷⣯⣷⢯⣿⣿⣿⣿⣿⣿
+⣷⣯⣷⣿⣿⡿⣿⣿⣽⡞⣽⣾⡿⣇⡷⣹⢬⣷⢾⣫⢾⣣⣿⣫⣿⣟⣾⣿⣿⣿⣿⣿⣿⣿⢿⣿⣻⣟⣯⣿⣿⣽⢯⣷⢻⣯⣻⣿⢿⣿
+⣿⣿⣾⣿⣿⣽⣿⣿⣧⢏⣷⣟⣿⣭⠷⣵⣻⣞⡿⣳⣫⣿⢷⣿⣟⣾⣿⣿⣿⣿⣿⣿⣿⣯⣿⣷⡿⣟⣿⣿⣿⡽⢾⡹⢯⣿⣿⣿⣾⣿
+⣼⣿⣿⣿⣿⣿⣿⣿⣯⢟⣷⣯⣿⡿⣹⣯⢷⣿⢽⣳⡿⣿⣿⣟⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣻⢾⣻⣿⢿⣿⣷⣟⣯⣹⢧⣿⣿⣿⣿⣿
+⣏⡿⣿⣿⣿⣿⣿⣿⢇⣿⣿⢾⣯⢷⣻⢿⣯⣯⠿⣿⣿⣿⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⡟⣾⣟⣾⣯⣯⣷⣛⡾⣿⣳⢺⣿⣷⣾⣿
+
+                You have no power here.`;
+                break;
+            case 'killjoy':
+                output = `
+  ⣴⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⣼⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣼⣿⣿⣿⣿⣿⣿⣿⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣤⣤⣶⣶⣿⣿⡗
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀
+⣿⣿⡇⠜⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⠀
+⣿⣿⣿⣶⣿⣿⣿⣿⣿⠋⡹⠙⣿⣿⣿⡇⠀⠀
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣾⣿⣿⠛⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠛⠁⠀⠀⠀⠀⠀⠀
+⣿⣿⡿⠻⠿⠿⠿⠿⠛⠹⠑⠀⠀
+⠟
+`;
+                break;
+            case 'buddy':
+                output = `
+⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⠍⡭⢩⡙⣍⠫⣝
+⣢⠙⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⢣⠚⡔⡣⢕⠪⡕⢎
+⡧⡙⣌⢣⡙⣌⢣⡙⣌⢣⡙⣌⢣⡙⣌⢣⡙⣌⠣⡙⢌⠣⡙⣌⢣⡙⣌⢣⡙⣌⢣⡙⣌⢣⡙⣌⢣⡙⣌⢣⡙⣌⢣⡙⠴⣉⠎⣕⠚⡬
+⣿⠰⡌⢦⠱⡌⢦⠱⡌⢦⠱⡌⢦⠱⡌⠦⡑⡈⠆⠡⢈⠆⡱⠀⢆⠐⠄⢢⠑⡌⢦⠱⡌⢦⠱⡌⢦⠱⡌⢦⠱⡌⢦⡙⢦⡉⠞⡤⢛⠴
+⣿⣗⡘⢆⠳⡘⢆⠳⡘⢆⠳⡘⢆⠓⡌⠱⢀⠡⢈⠰⡁⠎⡐⢁⠊⠔⢡⢂⠱⣈⠢⡑⡘⢆⠳⡘⢆⠳⡘⢆⠳⡘⢦⡙⢦⡙⡜⡰⢋⡜
+⣿⣿⣜⡡⢧⡙⣌⢣⡙⡌⢣⡙⠄⢃⠄⠃⠄⠂⢅⠒⢌⠐⡀⢃⠌⡐⢠⠊⡔⢠⠃⡔⡩⢌⡱⣉⢎⡱⣉⢎⡱⣉⠦⡙⢦⠱⣌⠱⡍⡜
+⣿⣿⣷⡱⢢⠱⡌⠦⡑⡌⢦⡙⢌⠂⠌⡐⢈⠐⡌⠒⠤⡈⠔⡡⢊⠰⡀⢣⠘⣄⢣⠐⣡⢚⡴⣩⢦⡱⢌⠦⡱⢌⠲⣉⢆⠳⣌⠳⣌⡱
+⣿⣿⡻⠟⡥⢃⡜⢠⠱⡌⢆⠩⠄⡊⡐⢀⢂⣼⣬⡑⢦⠑⡊⠐⠡⠒⡄⠣⡜⡰⢢⡙⢦⢡⠊⣕⢢⡑⣋⠖⡱⢊⠵⣈⢎⡱⢌⠳⣄⠳
+⣿⡿⡙⡑⢢⠑⡌⢢⠑⡘⢦⠑⡄⠂⠔⠠⡉⠛⢎⠙⡄⠣⢌⠱⣈⠱⣈⠳⣼⣷⣧⡚⢄⠣⠹⡌⢦⠱⡌⢎⡱⣋⠖⣡⠎⡴⣉⠶⣈⠓
+⠭⡐⠱⣈⠅⠪⠔⡡⢊⠔⡋⡔⢠⠁⠎⡡⢀⠉⠄⡊⠔⡡⢎⡴⢈⠲⣀⠏⠴⠨⢅⡱⢈⠆⡓⠜⡦⢱⡘⢦⠱⡘⢎⡲⣿⡶⠏⡜⡠⢍
+⠠⣁⠓⡄⢊⠱⣀⠱⡈⢆⠱⣈⠦⣉⠒⣀⠂⡌⢢⡙⣼⣭⣋⡞⣯⣿⡢⡍⢢⡑⢎⡰⢣⡘⡱⢪⡵⣂⠼⣄⠧⡙⡞⡳⢁⠎⣐⢢⡱⣾
+⠒⡄⢣⠘⡄⢃⠄⢣⠘⣀⠓⡌⢶⡡⢲⠄⢂⠜⡠⠘⡾⣿⣷⣽⣿⡿⡷⢩⠆⡙⠤⣃⠧⣘⢥⣫⡷⣭⠒⡌⡚⡥⡙⣔⢣⢚⣤⣷⣿⣿
+⠰⣈⠒⡘⠰⡁⠎⡄⢃⢄⣣⣜⣣⠷⣬⠞⡠⠘⡄⠣⡜⢿⣿⣿⡿⡛⢄⢃⠊⣔⢣⡑⢎⡵⣊⠿⣷⢂⠯⢡⢃⢲⡩⣌⡓⣎⢿⣿⣿⡿
+⡓⣌⠢⣥⣳⢈⡒⡌⠢⢞⡱⢿⡧⢯⣽⣷⣴⣡⣌⡳⣜⣣⢿⢧⣣⡑⢆⠌⡱⣈⢖⡹⢎⡖⡥⢊⡕⢪⢌⡑⢎⡔⡱⢆⡹⡰⣍⠿⣿⠓
+⡗⣎⠳⣌⠳⣎⡴⣌⣱⣣⣾⣧⡿⣽⡿⣿⣻⢳⡞⡷⢾⡵⣫⢭⣩⣟⣞⣼⣵⣮⡾⡝⢦⣹⠰⣇⢞⡱⣒⡜⠲⡬⢱⠫⣔⠳⣜⠎⡤⣉
+⢚⡬⢳⡜⡳⢬⢳⡹⣒⢧⡚⣴⢫⢗⡹⢶⣙⢦⡽⣹⢧⡳⣽⣺⢳⢏⡿⣿⢿⡿⣿⢿⣯⣟⣿⣞⣾⣵⠯⡸⣕⢮⣥⢛⣬⢻⣜⢯⡝⣶
+⢪⡜⣣⠞⣭⢳⣋⠶⣍⠶⣙⢦⣋⠮⡝⢮⡝⣮⡳⣭⢾⣹⢧⢯⣛⣻⣼⣱⢯⠿⣽⣳⡞⡾⢧⣻⣜⢧⢿⣹⠼⣾⣷⣫⡾⣝⡾⢷⣻⢾
+⡧⡝⣬⣛⠬⠷⡜⡯⣌⢧⡙⢦⣋⢞⡹⢺⣼⡱⣏⣞⢧⣛⢮⡗⣯⡳⣞⡼⣏⡟⢶⣹⢻⣝⡻⣜⡮⣟⢮⢷⣛⢷⣚⣿⢻⡿⣽⣳⡽⣎
+`;
+                break;
+            case 'buddy2':
+                output = `
+    ⡟⣭⢋⢯⡹⣍⢫⢛⡻⢿⣟⠫⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+    ⡝⣦⢋⠶⡱⢎⢣⠳⡜⡱⢪⣍⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⢟⣯⣷⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿
+    ⡝⢦⣋⢳⡙⢮⡱⢣⢎⡕⣣⠜⡻⢿⣿⣿⠿⣏⠞⣫⠔⣙⠫⡜⢧⠉⣆⠣⡙⢎⡗⢬⢻⣿⣿⣿⣿⣿⣿⣿
+    ⣝⢮⡝⣦⢛⢦⢣⢏⡞⡜⢦⡹⢥⠫⡝⢬⠓⣌⠚⣤⢋⡔⢣⠜⢢⠙⡄⢣⡘⢢⠜⢢⣙⣾⣿⣿⣿⣿⣿⣿
+    ⣞⢧⡞⡲⢭⡚⢦⣋⠶⣍⢧⡙⢦⣋⠼⣈⠳⣌⠳⣐⠣⡜⡡⠞⡠⢃⡜⠤⢃⢆⡸⢡⠎⡕⢺⣿⣿⣿⣿⣿
+    ⣞⣮⢓⡝⢦⡙⢦⢭⡛⣼⢢⡝⢦⡩⢞⡥⢫⠔⣣⢍⡚⢤⢃⠳⢠⠣⡘⠴⣋⠜⡰⢃⠞⡰⢣⣿⣿⣿⣿⣿
+    ⣿⣿⣯⣞⣧⡹⢎⡳⡝⣲⠹⣜⣣⠝⡺⡌⢧⡙⣌⢮⡑⢎⠮⣑⢃⢎⠱⢣⠘⡌⠰⡁⠮⣙⠣⢍⣱⣿⣿⣿
+    ⣿⣯⣿⣿⣟⣛⡍⣳⠝⣶⠻⡼⢌⡷⣡⡝⢦⡹⣌⠖⣩⠎⡜⡠⢎⠦⡑⢢⡑⢌⠱⢌⠳⢌⠲⢌⡹⢿⣿⣿
+    ⣿⣿⣿⣿⢟⡡⢞⣰⠻⡜⡧⣽⢎⡵⢣⣚⠧⣝⢮⡙⡤⣋⠴⡱⢊⠖⡩⢆⠸⣀⠣⣈⠒⡌⡘⠦⡑⢿⣿⣿
+    ⣿⣟⣻⠬⢎⡱⣃⣎⢻⢕⡷⣚⣦⡙⢇⡎⢾⡜⢦⡙⠶⣍⢺⡡⢏⠎⣵⣮⡒⠤⢣⢄⠣⢄⡑⢎⡑⢪⣿⣿
+    ⣟⣷⢿⡿⢫⢇⣱⢺⠰⣍⠲⡅⠶⣙⡜⣺⣿⣯⡷⣭⢳⡜⢦⡱⣩⢞⣿⣗⠏⢆⡡⠂⡍⢢⠙⠦⡙⢦⡹⣿
+    ⣟⣻⣿⣷⡷⢪⣕⢫⠞⣌⢣⢛⡟⠦⢿⣱⢻⡿⣭⠳⣏⢞⣣⠓⡜⢭⠢⡍⢎⠴⢃⠳⠘⡱⢎⡵⢡⠆⡹⢽
+    ⡾⣏⣿⣹⣷⣓⢮⢜⡺⢄⠳⡌⢞⡹⣚⠶⣫⢜⣲⠻⣜⡬⣱⢏⡜⢦⢓⡜⣨⠘⣄⠣⡑⢄⠊⣆⠣⡘⡔⣫
+    ⣷⢿⣶⣫⣷⣻⢎⡜⢬⢳⡙⢼⡩⢖⡭⢮⡕⣺⣍⡛⢦⣳⡹⣎⠼⣂⠧⣘⢄⠫⡔⠡⢌⡐⢯⡐⢡⠱⣜⠠
+    ⡿⣟⣾⣷⣽⣽⣟⡜⣆⡻⡜⣧⠼⣹⢞⡹⣘⡓⣮⣕⣫⠶⣝⣮⢳⡜⢢⠍⣊⠓⡌⡑⢢⡘⠢⡌⢦⡃⢎⡒
+    ⣯⣿⣵⣿⣹⣿⢿⣟⡿⣷⡏⣙⡓⢯⡚⢴⣩⠳⣜⣲⢯⣷⣻⡽⣖⣙⠦⡘⢄⠣⠔⡡⢂⠽⣧⣣⢿⣭⢧⡍
+    ⡿⣟⣿⣧⣿⣱⣯⠾⣿⣹⢷⣮⣺⣥⢟⡱⢎⡷⣘⠯⣿⣷⣿⣿⣻⣿⠠⡙⢄⡊⠔⡡⣛⡟⡷⣯⣽⣾⢿⣻
+    ⣽⣿⣞⣿⡽⣯⣽⣷⣻⣿⣟⣮⣻⣼⣭⢾⣏⣳⣑⡎⣻⠿⣿⣷⠿⡢⠑⡌⠢⡜⣤⢳⡝⣾⡱⠯⡼⣳⢿⣻
+    ⣿⣷⣿⢾⣟⣿⣷⣿⣻⣧⡿⣷⢽⣞⡿⣧⢿⡿⣿⣝⢦⡙⢴⡈⣶⣡⣿⣴⣿⣜⢷⣛⠾⣥⣛⡻⢽⣡⢮⢗
+    ⣿⣿⣿⣿⣿⣾⢿⣿⣿⣷⣿⣿⣿⣼⡿⣯⡷⣟⣾⢻⣽⢟⣻⡾⣝⣿⢺⡿⣟⣮⣏⣿⣻⢶⣯⣓⡿⣍⡿⡼
+    `;
+                break;
+            case 'bun':
+                output = `
+⣿⢿⡿⡿⡿⡿⡿⡿⡿⡿⡿⡿⡿⡿⣿⢿⣟⢿⢿⣟⡿⡿⡿⣟⢿⢿⣿⣿⣿⣿⠿⣿⢻⢿⠿⡿⡿⣻⢿⢿
+⢑⢕⢸⢑⢕⢸⢑⢕⢸⢑⢕⢸⢑⢕⢸⢑⢕⢸⢑⢕⣻⣞⣿⣺⣿⣿⣿⣿⣿⣿⣿⢻⡪⣏⢰⢑⢕⠱⢻⣿
+⢸⠱⡝⡬⣫⢛⢮⡪⣪⡘⣧⣳⢑⢕⢸⢑⢕⢸⢑⡪⣯⣿⣻⣿⢟⣏⢪⢪⣿⣿⣿⡳⢻⡪⣏⢰⢑⢕⠱⣿
+⢸⠱⡝⡬⣫⢛⢮⡪⣪⡘⣧⣳⢸⠱⡝⡬⣫⢛⣾⣯⣿⣽⣿⣽⣏⢪⢪⣏⣿⣿⣿⣟⢻⡪⣏⢰⢑⢕⠱⣿
+⢸⠱⡝⡬⣫⢛⢮⡪⣪⡘⣧⣳⢸⠱⡝⡬⡾⣿⡿⣿⢾⣿⣿⣏⢪⢪⣏⢪⣿⣿⣿⣽⣫⡌⣣⢓⢕⠥⡹⣿
+⢑⢕⠱⡡⡣⡱⢨⢎⢎⢕⢰⢑⢕⢸⠱⡝⣿⣿⣻⡿⣿⣿⣿⣟⠑⠔⡷⣿⣟⣿⣿⢞⣷⡌⣣⢓⢕⠥⡹⣿
+⢨⡣⣙⢜⡌⣣⢓⢕⠥⡹⢰⢑⢸⠱⡝⣿⣿⢿⣿⣿⣿⣿⣿⣟⣿⣽⣿⣿⣿⣿⣟⣿⡌⣣⢓⢕⠥⡹⢔⣿
+⢪⡳⡵⣹⢪⡳⡵⣹⢪⢰⢑⢕⣿⣾⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣿⣿⣿⣟⣿⣾⡌⣣⢓⢕⠥⡹⣿⣿
+⢜⣝⢻⡪⣏⢰⢑⢕⠱⣿⣻⣯⣿⣯⣿⣟⣿⣿⣿⣿⣽⣿⣿⣿⣷⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣟⣿⣿⣿⣻
+⢸⡪⡺⣢⢸⡪⡺⣢⣾⣟⣿⣟⣿⣽⣿⣟⣿⣿⣟⣿⣿⣿⣿⣿⣿⣿⣿⣯⣿⣻⡽⣾⣿⣿⢿⣿⣿⣟⣿⣿
+⢸⡪⡺⣢⢸⡪⢸⣿⣾⣟⣿⣿⣿⣿⣟⣿⣻⣿⣿⣿⣿⣿⣻⣯⣿⣯⣿⣿⡗⢝⢟⣿⣿⣿⣿⣿⣯⣿⣿⢿
+⣟⠿⠿⡻⢟⣛⣳⣿⣾⣿⣿⣿⣿⣾⣿⣿⣿⣻⣿⣿⢿⣿⣻⣿⣟⣿⣻⣿⡋⢼⣻⣿⣿⣿⣿⣻⣿⣿⣿⣿
+⢜⣝⢻⡪⣏⣿⣿⣿⣿⢿⣿⣾⣿⡿⣗⠯⡙⢝⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠝⡺⣿⣿⣿⣿⣿⣿⣿⣿⣾⣿
+⢮⡮⣳⣝⢾⣿⡿⣾⣿⣿⣟⣷⣿⡳⣴⣿⢟⣿⣟⣿⣿⣿⣿⣿⣿⣿⣿⣿⢑⢿⣿⣿⣿⣿⣿⣿⣻⣿⣿⣿
+⢪⡳⡵⣹⣻⣿⣿⣿⣿⣿⣿⢿⣿⣯⣻⡿⣿⣯⣿⣿⣿⣿⣾⣿⣿⣽⣿⡏⣎⣿⣿⣿⣿⣿⣻⣿⣿⣿⣿⣿
+⢸⡪⡺⣢⢿⣿⣿⢞⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠕⢦⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿
+⡪⣎⢟⡼⣽⣿⣯⡫⣿⣿⣿⣿⣿⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⢪⢪⣿⣿⣿⣿⣻⣿⣿⢿⣿⣿⣿
+⣪⢗⡽⣮⣻⣯⣿⠘⡾⣿⣯⣿⣿⣿⣿⣿⣾⣷⣿⣿⣿⣿⣾⣿⣿⡟⡔⣕⣻⣿⣿⣟⣿⣿⣿⣿⣿⣿⣿⣿
+⢜⡯⣻⣺⣿⡯⡑⡅⡙⡍⢻⢝⢿⣿⣿⡿⣿⣿⣿⣿⣾⣿⣿⣿⡟⣜⢾⣾⣿⣿⣿⣿⣿⣿⣾⣿⣟⣿⣾⣿
+⡹⣎⢷⡹⣿⢪⡘⢔⢌⢊⢆⠱⡈⢎⠛⠿⣟⣿⣯⣿⣟⣿⣛⣿⡱⣽⣟⣿⣿⣿⢿⣿⣾⣯⣿⣿⣿⣿⣿⣿
+⡸⡪⡳⣝⢿⣦⡱⡱⢌⣞⢡⠣⡪⡨⡑⢕⢌⡪⣛⢯⠿⡿⣟⣿⣿⣿⣿⣿⣷⠿⡛⢛⠱⡨⢹⣿⣿⡿⣿⣿
+⢸⠱⡝⡬⣫⢛⢮⡪⣪⡘⣧⣳⣘⡴⣕⡵⣧⢳⢗⡯⣞⢟⡽⣳⢟⡿⣟⠿⠠⠢⠨⡀⡑⢐⠄⣝⣿⣿⣿⣿
+⢨⡣⣙⢜⡌⣣⢓⢕⠥⡹⢔⠥⡫⡪⢕⠵⡱⣍⢧⢫⢎⢯⢺⢕⢯⡚⠡⡊⡐⠑⠔⡠⢊⠔⡱⡸⣾⣿⣿⣿
+⢔⡕⣕⢪⡪⣢⢣⢕⢕⢕⢕⢍⢎⢪⢊⢎⢪⠢⡣⢳⢑⢇⢳⡙⢆⢘⠔⢌⠌⡪⡘⢔⢅⢧⣽⣾⣿⣿⣿⣯
+⢨⢎⢎⢕⢕⢕⢕⢕⢕⠱⡡⡣⡱⡡⡣⡱⡡⢣⠱⡕⡕⢕⢕⢕⢌⠢⡣⢢⢑⢌⢪⢢⣣⡟⢷⢝⡽⡽⣿⣿
+⢰⢑⢕⠱⡡⡣⡱⢌⢎⢕⢜⢔⠕⡬⣊⢖⢱⡁⡓⢜⠪⡪⡱⠣⡳⡱⡱⡱⢅⠧⣓⢕⢥⢙⢎⢎⢮⡫⡺⡻
+`;
                 break;
             case 'joke':
                 const jokes = [
@@ -404,6 +707,8 @@ Technical details:
 
         setCommandHistory(prev => [...prev, { command: input, output }]);
         setInput('');
+        setHistoryPosition(-1);
+        setTempInput('');
     };
 
     const handleTerminalClick = () => {
@@ -417,83 +722,136 @@ Technical details:
     return (
         <AnimatePresence>
             {isVisible && (
-                <motion.div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                >
+                <>
                     <motion.div
-                        className="w-full max-w-3xl h-[32rem] bg-gray-900 rounded-lg shadow-2xl overflow-hidden"
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0.9, opacity: 0 }}
-                        transition={{ type: "spring", duration: 0.5 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
                     >
-                        <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
-                            <div className="flex items-center space-x-2">
-                                <div className="w-3 h-3 rounded-full bg-red-500" onClick={onCloseAction}></div>
-                                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                                <span className="ml-2 text-gray-300 flex items-center">
-                                    <FaTerminal className="mr-2" /> terminal
-                                </span>
-                            </div>
-                            <button
-                                onClick={onCloseAction}
-                                className="text-gray-400 hover:text-white transition-colors"
-                            >
-                                <FaTimes />
-                            </button>
-                        </div>
-
-                        <div
-                            className="h-[calc(100%-44px)] overflow-auto p-4 font-mono text-sm text-green-400 bg-gray-900"
-                            ref={terminalRef}
-                            onClick={handleTerminalClick}
+                        <motion.div
+                            className="w-full max-w-3xl h-[40rem] bg-gray-900 rounded-lg shadow-2xl overflow-hidden"
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            transition={{ type: "spring", duration: 0.5 }}
                         >
-                            <div className="mb-4">
-                                <p className="text-yellow-300">Woah! You found my secret terminal! 🚀</p>
-                                <p>Type 'help' to see available commands.</p>
-                                <p className="text-gray-500 text-xs mt-1">v1.0.0</p>
+                            <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-3 h-3 rounded-full bg-red-500" onClick={onCloseAction}></div>
+                                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                                    <span className="ml-2 text-gray-300 flex items-center">
+                                        <FaTerminal className="mr-2" /> terminal
+                                    </span>
+                                </div>
+                                <button
+                                    onClick={onCloseAction}
+                                    className="text-gray-400 hover:text-white transition-colors"
+                                >
+                                    <FaTimes />
+                                </button>
                             </div>
 
-                            {commandHistory.map((item, index) => (
-                                <div key={index} className="mb-2">
-                                    <div className="flex">
-                                        <span className="text-blue-400 mr-2">guest@dillons-portfolio:~$</span>
-                                        <span className="text-white">{item.command}</span>
-                                    </div>
-                                    <div
-                                        className="pl-4 mt-1 whitespace-pre-wrap"
-                                        dangerouslySetInnerHTML={{ __html: item.output }}
-                                    />
+                            <div
+                                className="h-[calc(100%-44px)] overflow-auto p-4 font-mono text-sm text-green-400 bg-gray-900"
+                                ref={terminalRef}
+                                onClick={handleTerminalClick}
+                            >
+                                <div className="mb-4">
+                                    <p className="text-yellow-300">Woah! You found my secret terminal! 🚀</p>
+                                    <p>Type 'help' to see available commands.</p>
+                                    <p className="text-gray-500 text-xs mt-1">v1.0.0</p>
                                 </div>
-                            ))}
 
-                            <form onSubmit={handleSubmit} className="flex items-center mt-2">
-                                <span className="text-blue-400 mr-2">guest@dillons-portfolio:~$</span>
-                                <div className="flex-1 relative">
-                                    <input
-                                        ref={inputRef}
-                                        type="text"
-                                        className="w-full bg-transparent outline-none text-white"
-                                        value={input}
-                                        onChange={(e) => setInput(e.target.value)}
-                                        autoFocus
-                                    />
-                                    {input.length === 0 && (
-                                        <span
-                                            className="absolute top-0 left-0 h-full w-2 bg-green-400"
-                                            style={{ opacity: cursorVisible ? 1 : 0 }}
-                                        ></span>
-                                    )}
-                                </div>
-                            </form>
-                        </div>
+                                {commandHistory.map((item, index) => (
+                                    <div key={index} className="mb-2">
+                                        <div className="flex">
+                                            <span className="text-blue-400 mr-2">guest@dillons-portfolio:~$</span>
+                                            <span className="text-white">{item.command}</span>
+                                        </div>
+                                        <div className="pl-4 mt-1 whitespace-pre-wrap">
+                                            {typeof item.output === 'string' ? (
+                                                <div dangerouslySetInnerHTML={{ __html: item.output }} />
+                                            ) : (
+                                                item.output
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
+
+                                <form onSubmit={handleSubmit} className="flex items-center mt-2">
+                                    <span className="text-blue-400 mr-2">guest@dillons-portfolio:~$</span>
+                                    <div className="flex-1 relative">
+                                        <input
+                                            ref={inputRef}
+                                            type="text"
+                                            className="w-full bg-transparent outline-none text-white"
+                                            value={input}
+                                            onChange={(e) => setInput(e.target.value)}
+                                            onKeyDown={handleKeyDown}
+                                            autoFocus
+                                        />
+                                        {input.length === 0 && (
+                                            <span
+                                                className="absolute top-0 left-0 h-full w-2 bg-green-400"
+                                                style={{ opacity: cursorVisible ? 1 : 0 }}
+                                            ></span>
+                                        )}
+                                    </div>
+                                </form>
+                            </div>
+                        </motion.div>
                     </motion.div>
-                </motion.div>
+
+                    {fakeDeleteActive && (
+                        <motion.div
+                            className="fixed inset-0 z-[60] bg-black flex flex-col justify-center items-center p-10 font-mono text-sm"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            {deleteProgress.includes('__FADEOUT__') ? (
+                                <motion.div
+                                    className="absolute inset-0 bg-black"
+                                    initial={{ opacity: 1 }}
+                                    animate={{ opacity: 0 }}
+                                    transition={{ duration: 1.5, ease: "easeOut" }}
+                                />
+                            ) : deleteProgress.includes('__JUST_KIDDING__') ? (
+                                <div className="absolute inset-0 bg-black flex items-center justify-center">
+                                    <motion.div
+                                        className="text-white text-4xl font-bold"
+                                        initial={{ opacity: 0, scale: 1 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.5 }}
+                                    >
+                                        jk
+                                    </motion.div>
+                                </div>
+                            ) : deleteProgress.includes('__BLACKOUT__') ? (
+                                <div className="absolute inset-0 bg-black"></div>
+                            ) : (
+                                <>
+                                    <div className="text-red-500 text-xl mb-4">DELETING ALL FILES</div>
+                                    <div className="w-full max-w-2xl">
+                                        {deleteProgress.filter(line => !['__BLACKOUT__', '__FADEOUT__', '__JUST_KIDDING__'].includes(line)).map((line, i) => (
+                                            <div key={i} className="text-green-500 mb-1">
+                                                {line.includes('All files') ?
+                                                    <span className="text-red-500">{line}</span> :
+                                                    line.includes('Wait') ?
+                                                        <span className="text-yellow-300">{line}</span> :
+                                                        line}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+                        </motion.div>
+                    )}
+                </>
             )}
         </AnimatePresence>
     );
