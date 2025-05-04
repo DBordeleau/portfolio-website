@@ -29,13 +29,6 @@ export default function Contact() {
       <SectionHeader>Get in touch</SectionHeader>
       <p className='text-gray-700 dark:text-white/80 -mt-6'>You can reach me directly at <a className='underline' href="mailto:dillonbordeleau@gmail.com">DillonBordeleau@gmail.com</a> or use this form.</p>
 
-      {/* Hidden Easter Egg Hint - only visible when highlighted */}
-      <div className="relative w-full mt-2">
-        <p className="absolute top-[10rem] text-white select-all text-sm text-center w-full hover:text-black">
-          To bring up the terminal enter the konami code on your keyboard: ↑↑↓↓←→←→BA
-        </p>
-      </div>
-
       <form className='mt-10 flex flex-col dark:text-black' action={async formData => {
         const { data, error } = await sendEmail(formData);
         const flowey = document.getElementById('flower');
