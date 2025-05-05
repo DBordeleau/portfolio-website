@@ -4,7 +4,22 @@ import sprandomizerImg from "@/public/sprandomizer.jpeg";
 import portfoliositeImg from "@/public/portfoliositescreenshot.png";
 import facemaskappImg from '@/public/facemaskappgif.gif'
 import yofhldbImg from '@/public/yofhldbscreenshot.png'
+import draftlotteryImg from '@/public/draftlotteryimage.png'
 
+type Project = {
+    title: string;
+    slug: string;
+    description: string;
+    tags: readonly string[];
+    imageUrl: any;
+    demoLink?: string;
+    githubLink?: string;
+    githubOwner?: string;
+    features?: string[];
+    learningOutcomes?: string[];
+    winDownloadLinkZip?: string;
+    winDownloadLinkExe?: string;
+};
 
 export const links = [
     {
@@ -40,7 +55,7 @@ export const experiencesData = [
     },
 ] as const;
 
-export const projectsData = [
+export const projectsData: readonly Project[] = [
     {
         title: "Face Mask Detection AI",
         slug: "face-mask-detection",
@@ -76,10 +91,9 @@ export const projectsData = [
             "Smooth animations that provide a polished user experience",
         ],
         learningOutcomes: [
-            "Deployed a PostgreSQL database with web access",
             "Designed and populated a relational schema from scratch",
             "Automated CSV ingestion using Python and Pandas",
-            "Queried and managed data using Prisma ORM within a Next.js application",
+            "Deployed my PostgreSQL database to Neon and integrated it with a Next.js app using Prisma ORM",
             "Implemented dynamic routing in Next.js to fetch and display context-specific data from the database, enabling users to view historical stats in a way that is impossible with our native fantasy hockey platform.",
             "Built custom pagination logic with React hooks to improve performance and user experience"
         ]
@@ -130,6 +144,30 @@ export const projectsData = [
         ]
     },
     /*
+    {
+        title: "Draft Lottery Simulator",
+        slug: "draft-lottery-simulator",
+        description:
+            "This is a Qt widget application made with C++ that simulates a draft lottery for a fantasy hockey league. The GitHub repo also contains an Inno Setup script I wrote to create an installer for the application.",
+        tags: ["C++", "Qt", "Inno Setup"],
+        imageUrl: draftlotteryImg,
+        demoLink: '',
+        winDownloadLinkZip: 'http://yofhl-db.vercel.app/draftlottery.zip',
+        winDownloadLinkExe: 'http://yofhl-db.vercel.app/yofhl-draft-lottery-installer.exe',
+        githubLink: 'https://github.com/DBordeleau/portfolio-website',
+        githubOwner: 'DBordeleau',
+        features: [
+            "Simulates a draft lottery for my fantasy hockey league.",
+            "Custom GUI built with Qt widgets that allows users to select a number of teams and specify weighted odds for each team.",
+            "Suspenseful reveal that reveals eliminated teams one by one before revealing the winner.",
+            "Inno Setup installer for easy installation so my co-commissioners can run the lottery.",
+        ],
+        learningOutcomes: [
+            "Wrote all the logic for the lottery simulator in C++",
+            "Designed and implemented a custom GUI using Qt widgets, also dynamically generated the GUI based on user input.",
+            "Wrote a custom Inno Setup script to create an installer for the application so I could deploy it on windows."
+        ]
+    }
     {
         title: "Blog/Social Media Clone",
         description: "This is a Node.js app I made using React and Tailwind CSS. The site features account registration, login authentication, and has the ability for users to make posts and attach images to them."

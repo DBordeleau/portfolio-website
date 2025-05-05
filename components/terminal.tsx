@@ -169,7 +169,7 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
                 const uptimeDays = calculateUptime();
                 output = `
   <div class="flex flex-col md:flex-row">
-    <div class="md:mr-8 text-yellow-400 whitespace-pre">            
+    <div class="md:mr-8 font-bold text-yellow-400 whitespace-pre" style="text-shadow: 0 0 10px #fcd34d, 0 0 20px #fcd34d, 0 0 30px #f59e0b">            
             /\\
            /  \\
           /    \\
@@ -196,7 +196,7 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
         <span class="text-blue-400">GitHub:</span> github.com/DBordeleau
       </div>
       
-      <div class="mt-2">
+      <div class="ml-[4rem] -mt-[2rem]">
         <div class="flex">
           <div class="w-6 h-6 bg-black border border-gray-600"></div>
           <div class="w-6 h-6 bg-red-600"></div>
@@ -237,22 +237,25 @@ export default function Terminal({ isVisible, onCloseAction }: TerminalProps) {
             case 'please':
             case 'help please':
                 output = 'Since you asked nicely, here are some commands you can try:\n' +
-                    "• clear - Clears terminal commands\n" +
-                    "• exit - Quits terminal\n" +
+                    "\n" +
+                    "• neofetch - Show system \"information\"\n" +
+                    "• cmatrix - Neo is waiting.\n" +
                     "• ascii - Show ASCII art\n" +
                     "• joke - Tell a programming joke\n" +
                     "• flip - Flip a coin\n" +
                     "• rps - Play Rock, Paper, Scissors\n" +
                     "• fortune - Open a tech themed fortune cookie\n" +
                     "• adventure - Start a mini text based adventure!\n" +
-                    "\n...and a few hidden commands for you to discover!";
+                    "• clear - Clears terminal commands\n" +
+                    "• exit - Quits terminal\n" +
+                    "\n...and many hidden commands ;)";
                 break;
             case 'clear':
                 setCommandHistory([]);
                 setInput('');
                 return;
             case 'thebladegamer':
-                output = 'Night Brian'
+                output = 'Night Brian 😴'
                 break;
             case 'exit':
                 onCloseAction();

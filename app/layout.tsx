@@ -13,7 +13,7 @@ import { DeletionEffectProvider } from '@/context/deletionsimulationcontext';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Dillon | Student Portfolio',
+  title: 'Dillo Bordeleau | Student Portfolio',
   description: 'Dillon Bordeleau is an aspiring full-stack developer seeking internship and co-op opportunities.',
 }
 

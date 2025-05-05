@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { projectsData } from '@/lib/data';
-import { FaArrowLeft, FaGithub, FaExternalLinkAlt, FaHome } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaHome, FaWindows, FaDownload } from 'react-icons/fa';
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import MarkdownRenderer from '@/components/markdownrenderer';
 import { fetchReadme } from '@/lib/utils';
@@ -126,7 +126,7 @@ export default function ProjectPage() {
                             </motion.div>
 
                             <motion.div
-                                className="flex gap-4"
+                                className="flex gap-4 flex-wrap"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.4 }}
@@ -153,6 +153,59 @@ export default function ProjectPage() {
                                     </a>
                                 )}
                             </motion.div>
+                            {(project.winDownloadLinkZip || project.winDownloadLinkExe) && (
+                                <motion.div
+                                    className="mt-6"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.5 }}
+                                >
+                                    <h3 className="text-lg font-semibold mb-3">Downloads</h3>
+                                    <div className="flex flex-col gap-5 max-w-md">
+                                        {project.winDownloadLinkExe && (
+                                            <div>
+                                                <motion.a
+                                                    href={project.winDownloadLinkExe}
+                                                    whileHover={{ scale: 1.02, boxShadow: "0 5px 15px rgba(59, 130, 246, 0.4)" }}
+                                                    whileTap={{ scale: 0.98 }}
+                                                    className="bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium py-2.5 px-4 rounded flex items-center justify-between shadow-md"
+                                                    download
+                                                >
+                                                    <div className="flex items-center gap-2">
+                                                        <FaWindows className="text-xl" />
+                                                        <span>Windows Installer (.exe)</span>
+                                                    </div>
+                                                    <FaDownload />
+                                                </motion.a>
+                                                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 ml-1">
+                                                    Run the installer and follow the on-screen instructions to install.
+                                                </p>
+                                            </div>
+                                        )}
+
+                                        {project.winDownloadLinkZip && (
+                                            <div>
+                                                <motion.a
+                                                    href={project.winDownloadLinkZip}
+                                                    whileHover={{ scale: 1.02, boxShadow: "0 5px 15px rgba(59, 130, 246, 0.4)" }}
+                                                    whileTap={{ scale: 0.98 }}
+                                                    className="bg-gradient-to-r from-gray-600 to-gray-700 text-white font-medium py-2.5 px-4 rounded flex items-center justify-between shadow-md"
+                                                    download
+                                                >
+                                                    <div className="flex items-center gap-2">
+                                                        <FaWindows className="text-xl" />
+                                                        <span>Download ZIP Archive</span>
+                                                    </div>
+                                                    <FaDownload />
+                                                </motion.a>
+                                                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 ml-1">
+                                                    Extract the ZIP file and run <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">draftlottery.exe</code> to start the application.
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </motion.div>
+                            )}
                         </div>
 
                         <motion.div
