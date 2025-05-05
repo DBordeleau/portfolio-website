@@ -51,8 +51,8 @@ export default function Header() {
         animate={{ y: 0, x: "-50%", opacity: 1 }}
       ></motion.div>
 
-      <nav className="flex fixed top-[0.5rem] left-1/2 text-[0.7rem] md:text-[.85rem] md:w-full justify-center -translate-x-1/2 md:top-[1.25rem] sm:py-1 md:py-2 lg:py-3 xl:py-3">
-        <ul className="flex flex-wrap justify-center gap-x-3 lg:gap-x-2 font-medium text-gray-500">
+      <nav className="flex fixed top-[0.5rem] left-1/2 text-[0.7rem] md:text-[.85rem] w-full justify-center -translate-x-1/2 md:top-[1.25rem] sm:py-1 md:py-2 lg:py-3 xl:py-3">
+        <ul className="flex flex-wrap justify-center gap-x-2 md:gap-x-3 lg:gap-x-2 font-medium text-gray-500">
           {links.map(link => (
             <motion.li
               className="relative flex justify-center"
@@ -61,7 +61,7 @@ export default function Header() {
               animate={{ y: 0, opacity: 1 }}
             >
               <Link
-                className={clsx('flex items-center justify-center px-0 py-2 sm:px-3 hover:text-gray-950 transition dark:hover:text-gray-300', {
+                className={clsx('flex items-center justify-center px-1 py-2 sm:px-3 hover:text-gray-950 transition dark:hover:text-gray-300', {
                   'text-gray-950 dark:text-gray-200': activeSection === link.name,
                 })}
                 href={link.hash}

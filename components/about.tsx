@@ -28,7 +28,7 @@ export default function About() {
 
       <p className='text-[1.05rem] sm:text-[1.25rem]'>
         When I'm not programming I like to read, play video games and listen to hip-hop music. I am <span className="font-medium">always learning and familiarizing myself with new technologies</span>.
-        Most recently I have been studying Android development in Kotlin with Jetpack Compose.
+        Most recently I have been teaching myself C++ and embedded software development.
         I also have a background in <span className="font-bold">Neuroscience</span>, which I studied at Carleton University before enrolling in Computer Science. You can read my undergraduate research <a className='text-blue-600 font-medium text-decoration: underline' href="https://onlinelibrary.wiley.com/doi/abs/10.1111/jne.13222" target='_blank'>here</a>. I continue to
         consume Neuroscience literature and have a keen interest in <span className="font-bold">human-computer interactions</span> and <span className="font-medium">brain-computer interfaces</span>.
       </p>

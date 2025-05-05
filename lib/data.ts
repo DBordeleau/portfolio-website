@@ -78,7 +78,7 @@ export const projectsData: readonly Project[] = [
         title: "Fantasy Hockey Database App",
         slug: "yofhl-db",
         description: "This is a Next.js app that allows users to make requests to a PostgreSQL database and view historical league data for a fantasy hockey league. I built the database myself and imported the fantasy stats with Python/Pandas. The website uses dynamic URLs to fetch appropriate data from the database.",
-        tags: ["TypeScript", "React", "Next.js", "SQL", "PostgreSQL", "Prisma", "Tailwind", "Framer"],
+        tags: ["TypeScript", "React", "Next.js", "SQL", "PostgreSQL", "Prisma", "Tailwind"],
         imageUrl: yofhldbImg,
         demoLink: 'https://yofhl-db.vercel.app',
         githubLink: 'https://github.com/DBordeleau/yofhl_db',
@@ -93,7 +93,7 @@ export const projectsData: readonly Project[] = [
         learningOutcomes: [
             "Designed and populated a relational schema from scratch",
             "Automated CSV ingestion using Python and Pandas",
-            "Deployed my PostgreSQL database to Neon and integrated it with a Next.js app using Prisma ORM",
+            "Deployed a PostgreSQL database to Neon and integrated it with a Next.js app using Prisma ORM",
             "Implemented dynamic routing in Next.js to fetch and display context-specific data from the database, enabling users to view historical stats in a way that is impossible with our native fantasy hockey platform.",
             "Built custom pagination logic with React hooks to improve performance and user experience"
         ]
