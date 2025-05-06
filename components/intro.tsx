@@ -15,7 +15,7 @@ export default function Intro() {
   const { setActiveSection, setLastClickTime } = useActiveSectionContext();
 
   return (
-    <section ref={ref} id='home' className='mb-28 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]'>
+    <section ref={ref} id='home' className='mb-[2rem] max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]'>
       <div className='flex items-center justify-center'>
         <div className='relative'>
           <motion.div
@@ -57,10 +57,10 @@ export default function Intro() {
         }}>Contact me <BsArrowRight className='opacity-70 group-hover:translate-x-2 transition' /></Link>
 
         <a className='group shadow-md bg-white hover:bg-gray-100 px-7 py-3 flex items-center gap-2 rounded-full outline-none transition-all cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60 dark:border dark:border-white dark:hover:bg-white/20 dark:hover:text-white' href='/DillonBordeleauCV.pdf' download={true}>Download my Résumé <HiDownload className='opacity-70 group-hover:translate-y-1 transition' /></a>
-
-        <a className='bg-white shadow-md p-4 flex text-gray-700 items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition-all cursor-pointer borderBlack dark:border dark:border-white dark:bg-white/10 dark:text-white/60 dark:hover:bg-white/20 dark:hover:text-white' href='https://www.linkedin.com/in/dillonbordeleau/' target='_blank'><BsLinkedin /></a>
-
-        <a className='bg-white shadow-md p-4 flex text-[1.35rem] text-gray-700 items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition-all cursor-pointer borderBlack dark:border dark:border-white dark:bg-white/10 dark:text-white/60 dark:hover:bg-white/20 dark:hover:text-white' href='https://github.com/DBordeleau/' target='_blank'><FaGithubSquare /></a>
+        <div className='flex flex-row gap-4'>
+          <a className='bg-white shadow-md p-4 flex text-gray-700 items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition-all cursor-pointer borderBlack dark:border dark:border-white dark:bg-white/10 dark:text-white/60 dark:hover:bg-white/20 dark:hover:text-white' href='https://www.linkedin.com/in/dillonbordeleau/' target='_blank'><BsLinkedin /></a>
+          <a className='bg-white shadow-md p-4 flex text-[1.35rem] text-gray-700 items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition-all cursor-pointer borderBlack dark:border dark:border-white dark:bg-white/10 dark:text-white/60 dark:hover:bg-white/20 dark:hover:text-white' href='https://github.com/DBordeleau/' target='_blank'><FaGithubSquare /></a>
+        </div>
       </motion.div>
     </section>
   )
