@@ -4,7 +4,7 @@ import sprandomizerImg from "@/public/sprandomizer.jpeg";
 import portfoliositeImg from "@/public/portfoliositescreenshot.png";
 import facemaskappImg from '@/public/facemaskappgif.gif'
 import yofhldbImg from '@/public/yofhldbscreenshot.png'
-import draftlotteryImg from '@/public/draftlotteryimage.png'
+import draftlotteryImg from '@/public/DraftLotteryPreview.gif'
 
 type Project = {
     title: string;
@@ -99,6 +99,32 @@ export const projectsData: readonly Project[] = [
         ]
     },
     {
+        title: "Draft Lottery Simulator",
+        slug: "draft-lottery-simulator",
+        description:
+            "This is a Qt widget application made with C++ that simulates a draft lottery for a fantasy hockey league. The GitHub repo also contains an Inno Setup script I wrote to create an installer for the application.",
+        tags: ["C++", "Qt", "Inno Setup"],
+        imageUrl: draftlotteryImg,
+        demoLink: '',
+        winDownloadLinkZip: 'http://yofhl-db.vercel.app/draftlottery.zip',
+        winDownloadLinkExe: 'http://yofhl-db.vercel.app/yofhl-draft-lottery-installer.exe',
+        githubLink: 'https://github.com/DBordeleau/draft-lottery',
+        githubOwner: 'DBordeleau',
+        features: [
+            "Simulates a draft lottery for my fantasy hockey league.",
+            "Custom GUI built with Qt widgets that allows users to select a number of teams and specify weighted odds for each team.",
+            "Suspenseful reveal that reveals eliminated teams one by one before revealing the winner. Custom animations make for a fun experience.",
+            "Inno Setup installer for easy installation so my co-commissioners can run the lottery.",
+        ],
+        learningOutcomes: [
+            "Wrote all the logic for the lottery simulator in C++",
+            "Designed and implemented a custom GUI using Qt widgets, also dynamically generated the GUI based on user input.",
+            "Created custom animations to slide in and out the eliminated teams and winner. Also created a confetti piece class to animate a burst of confetti falling when the winner is revealed.",
+            "Wrote a custom Inno Setup script to create an installer for the application so I could deploy it on windows.",
+            "I'm in the process of deploying the app on Linux."
+        ]
+    },
+    {
         title: "South Park Randomizer",
         slug: "south-park-randomizer",
         description:
@@ -142,32 +168,8 @@ export const projectsData: readonly Project[] = [
             "Designed and implemented a header with active section highlighting using React hooks. Also implemented a debounce to prevent erratic highlighter behaviour.",
             "Configured a SMTP server using Resend to send emails to my personal email from the contact form.",
         ]
-    },
-    /*
-    {
-        title: "Draft Lottery Simulator",
-        slug: "draft-lottery-simulator",
-        description:
-            "This is a Qt widget application made with C++ that simulates a draft lottery for a fantasy hockey league. The GitHub repo also contains an Inno Setup script I wrote to create an installer for the application.",
-        tags: ["C++", "Qt", "Inno Setup"],
-        imageUrl: draftlotteryImg,
-        demoLink: '',
-        winDownloadLinkZip: 'http://yofhl-db.vercel.app/draftlottery.zip',
-        winDownloadLinkExe: 'http://yofhl-db.vercel.app/yofhl-draft-lottery-installer.exe',
-        githubLink: 'https://github.com/DBordeleau/portfolio-website',
-        githubOwner: 'DBordeleau',
-        features: [
-            "Simulates a draft lottery for my fantasy hockey league.",
-            "Custom GUI built with Qt widgets that allows users to select a number of teams and specify weighted odds for each team.",
-            "Suspenseful reveal that reveals eliminated teams one by one before revealing the winner.",
-            "Inno Setup installer for easy installation so my co-commissioners can run the lottery.",
-        ],
-        learningOutcomes: [
-            "Wrote all the logic for the lottery simulator in C++",
-            "Designed and implemented a custom GUI using Qt widgets, also dynamically generated the GUI based on user input.",
-            "Wrote a custom Inno Setup script to create an installer for the application so I could deploy it on windows."
-        ]
     }
+    /*
     {
         title: "Blog/Social Media Clone",
         description: "This is a Node.js app I made using React and Tailwind CSS. The site features account registration, login authentication, and has the ability for users to make posts and attach images to them."
