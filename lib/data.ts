@@ -57,24 +57,6 @@ export const experiencesData = [
 
 export const projectsData: readonly Project[] = [
     {
-        title: "Face Mask Detection AI",
-        slug: "face-mask-detection",
-        description: "This is a two phase project I'm working on where I trained an AI to detect whether or not someone is wearing a face mask using a convolutional neural network. After training the model I built a simple API using Flask that allows the model to be deployed to the web to receive requests. The project includes a simple front-end where users can upload images for the model to make predictions about. Please note the live demo may take some time to respond as a limitation of the free hosting.",
-        tags: ["Python", "PyTorch", "Flask", "JavaScript"],
-        imageUrl: facemaskappImg,
-        demoLink: 'https://face-mask-detection-qzwb.onrender.com/',
-        githubLink: 'https://github.com/DBordeleau/face-mask-detection',
-        githubOwner: 'DBordeleau',
-        features: [
-            "CNN image classification model I trained using PyTorch.",
-            "Flask web interface that allows users to upload images and request predictions from the model.",
-        ],
-        learningOutcomes: [
-            "Trained a convolutional neural network on a Kaggle dataset (already cleaned). My training process involved data augmentation, hyperparameter tuning and model evaluation.",
-            "Built and deployed a Flask app that allows users to upload images for the model to make predictions about.",
-        ]
-    },
-    {
         title: "Fantasy Hockey Database App",
         slug: "yofhl-db",
         description: "This is a Next.js app that allows users to make requests to a PostgreSQL database and view historical league data for a fantasy hockey league. I built the database myself and imported the fantasy stats with Python/Pandas. The website uses dynamic URLs to fetch appropriate data from the database.",
@@ -122,6 +104,24 @@ export const projectsData: readonly Project[] = [
             "Created custom animations to slide in and out the eliminated teams and winner. Also created a confetti piece class to animate a burst of confetti falling when the winner is revealed.",
             "Wrote a custom Inno Setup script to create an installer for the application so I could deploy it on windows.",
             "I'm in the process of deploying the app on Linux."
+        ]
+    },
+    {
+        title: "Face Mask Detection AI",
+        slug: "face-mask-detection",
+        description: "This is a two phase project I'm working on where I trained an AI to detect whether or not someone is wearing a face mask using a convolutional neural network. After training the model I built a simple API using Flask that allows the model to be deployed to the web to receive requests. The project includes a simple front-end where users can upload images for the model to make predictions about. Please note the live demo may take some time to respond as a limitation of the free hosting.",
+        tags: ["Python", "PyTorch", "Flask", "JavaScript"],
+        imageUrl: facemaskappImg,
+        demoLink: 'https://face-mask-detection-qzwb.onrender.com/',
+        githubLink: 'https://github.com/DBordeleau/face-mask-detection',
+        githubOwner: 'DBordeleau',
+        features: [
+            "CNN image classification model I trained using PyTorch.",
+            "Flask web interface that allows users to upload images and request predictions from the model.",
+        ],
+        learningOutcomes: [
+            "Trained a convolutional neural network on a Kaggle dataset (already cleaned). My training process involved data augmentation, hyperparameter tuning and model evaluation.",
+            "Built and deployed a Flask app that allows users to upload images for the model to make predictions about.",
         ]
     },
     {
