@@ -5,7 +5,7 @@ import portfoliositeImg from "@/public/portfoliositescreenshot.png";
 import facemaskappImg from '@/public/facemaskappgif.gif'
 import yofhldbImg from '@/public/yofhldbscreenshot.png'
 import draftlotteryImg from '@/public/DraftLotteryPreview.gif'
-import orbitalDefenseImg from '@/public/orbitaldefenseimg.png'
+import orbitalDefenseImg from '@/public/orbitalDefenseImg.png'
 
 type Project = {
     title: string;
