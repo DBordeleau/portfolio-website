@@ -2,10 +2,9 @@
 
 import React from 'react';
 import { skillsData } from '@/lib/data';
-import { FaPython, FaDatabase, FaReact, FaNodeJs, FaGitAlt, FaBootstrap, FaHtml5, FaCss3Alt, FaJava } from 'react-icons/fa';
-import { SiPandas, SiFlask, SiJavascript, SiTypescript, SiExpress, SiKotlin, SiJetpackcompose, SiPytorch, SiPostgresql, SiPrisma, SiSupabase } from 'react-icons/si';
-import { RiNextjsLine, RiTailwindCssFill } from 'react-icons/ri';
-import { FiFramer } from 'react-icons/fi';
+import { FaPython, FaDatabase, FaReact, FaNodeJs, FaGitAlt, FaJava, FaCuttlefish, FaDocker } from 'react-icons/fa';
+import { SiFlask, SiJavascript, SiTypescript, SiSwift, SiPytorch, SiPostgresql, SiSupabase, SiAmazons3, SiFastapi } from 'react-icons/si';
+import { RiNextjsLine } from 'react-icons/ri';
 import { delay, motion } from 'framer-motion';
 
 const fadeInAnimationVariants = {
@@ -24,26 +23,23 @@ const fadeInAnimationVariants = {
 
 const iconComponents = {
     FaPython,
-    SiPandas,
     SiFlask,
+    SiSwift,
+    FaCuttlefish,
     FaDatabase,
     SiJavascript,
     SiTypescript,
     FaReact,
     RiNextjsLine,
     FaNodeJs,
-    SiExpress,
     FaGitAlt,
-    RiTailwindCssFill,
-    FiFramer,
-    FaHtml5,
-    FaCss3Alt,
     FaJava,
-    SiKotlin,
     SiPytorch,
+    FaDocker,
+    SiAmazons3,
     SiPostgresql,
-    SiPrisma,
-    SiSupabase
+    SiSupabase,
+    SiFastapi
 };
 
 export default function SkillsList() {

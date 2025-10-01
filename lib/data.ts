@@ -5,6 +5,7 @@ import portfoliositeImg from "@/public/portfoliositescreenshot.png";
 import facemaskappImg from '@/public/facemaskappgif.gif'
 import yofhldbImg from '@/public/yofhldbscreenshot.png'
 import draftlotteryImg from '@/public/DraftLotteryPreview.gif'
+import autograderImg from '@/public/autograder.gif'
 
 type Project = {
     title: string;
@@ -56,6 +57,32 @@ export const experiencesData = [
 ] as const;
 
 export const projectsData: readonly Project[] = [
+    {
+        title: "C++ Autograding Server",
+        slug: "cpp-autograding-server",
+        description:
+            "Submission server for C++ programming assignments that compiles and runs user-defined tests on C++ projects in isolated Docker containers. Autograding is based on user-defined expected output and results are stored in a SQLite database. Students submit their projects via a web interface. The web interface features an admin panel that supports CRUD operations for managing assignments, tests and autograders.",
+        tags: ["C++", "Python", "FastAPI", "SQLite", "Docker"],
+        imageUrl: autograderImg,
+        demoLink: '',
+        githubLink: 'https://github.com/DBordeleau/cpp_autograder',
+        githubOwner: 'DBordeleau',
+        features: [
+            "Automatic grading for C++ programming assignments.",
+            "Supports multiple assignments, each with their own set of tests and autograders.",
+            "Isolated grading environment using Docker containers to ensure security and consistency.",
+            "Admin panel for managing assignments, tests and autograders.",
+            "Text based configuration file for fast/batch setup of assignments, tests and autograders.",
+            "Persistent storage of submission results using SQLite.",
+            "Simple authentication using JWT tokens.",
+        ],
+        learningOutcomes: [
+            "Built a core autograder in C++ that can compile and run C++ projects with user defined inputs and capture + parse their outputs. The autograder was designed using object-oriented principles to be easily extensible for future features.",
+            "Built a REST API using Python and FastAPI to handle file uploads, manage assignments/tests/autograders and store submission results in a SQLite database.",
+            "Containerized the autograding process using Docker to ensure each submission is compiled and graded in an isolated environment. This involved writing custom Dockerfiles and managing container lifecycles from Python.",
+            "Wrote user-facing documentation to help users understand how to use the system and set up their own assignments/tests/autograders."
+        ]
+    },
     {
         title: "Fantasy Hockey Database App",
         slug: "yofhl-db",
@@ -191,22 +218,21 @@ export const projectsData: readonly Project[] = [
 ] as const;
 
 export const skillsData = [
+    { name: "C/C++", icon: "FaCuttlefish" },
+    { name: "Java", icon: "FaJava" },
     { name: "Python", icon: "FaPython" },
-    { name: "Pandas", icon: "SiPandas" },
-    { name: "Flask", icon: "SiFlask" },
-    { name: "PyTorch", icon: "SiPytorch" },
-    { name: "React", icon: "FaReact" },
-    { name: "JavaScript", icon: "SiJavascript" },
+    { name: "Swift", icon: "SiSwift" },
     { name: "TypeScript", icon: "SiTypescript" },
+    { name: "React", icon: "FaReact" },
     { name: "Next.js", icon: "RiNextjsLine" },
     { name: "Node.js", icon: "FaNodeJs" },
     { name: "SQL", icon: "FaDatabase" },
     { name: "PostgreSQL", icon: "SiPostgresql" },
-    { name: "Prisma", icon: "SiPrisma" },
+    { name: "Flask", icon: "SiFlask" },
+    { name: "FastAPI", icon: "SiFastapi" },
+    { name: "PyTorch", icon: "SiPytorch" },
+    { name: "Docker", icon: "FaDocker" },
+    { name: "Amazon S3", icon: "SiAmazons3" },
     { name: "Supabase", icon: "SiSupabase" },
     { name: "Git", icon: "FaGitAlt" },
-    { name: "Tailwind", icon: "RiTailwindCssFill" },
-    { name: "Framer", icon: "FiFramer" },
-    { name: "Java", icon: "FaJava" },
-    { name: "Kotlin", icon: "SiKotlin" },
 ] as const;
