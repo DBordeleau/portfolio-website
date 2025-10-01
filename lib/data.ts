@@ -6,6 +6,7 @@ import facemaskappImg from '@/public/facemaskappgif.gif'
 import yofhldbImg from '@/public/yofhldbscreenshot.png'
 import draftlotteryImg from '@/public/DraftLotteryPreview.gif'
 import autograderImg from '@/public/autograder.gif'
+import orbitalDefenseImg from '@/public/orbitalDefenseImg.png'
 
 type Project = {
     title: string;
@@ -195,20 +196,36 @@ export const projectsData: readonly Project[] = [
             "Designed and implemented a header with active section highlighting using React hooks. Also implemented a debounce to prevent erratic highlighter behaviour.",
             "Configured a SMTP server using Resend to send emails to my personal email from the contact form.",
         ]
-    }
+    },
+    {
+        title: "Orbital Defense",
+        slug: "orbital-defense",
+        description: "Orbital Defense is an endless wave survival/tower defense game built with Godot for the 2025 GMTK Game Jam. I completed the project in less than 72 hours, and placed in the top 2500 among nearly 10,000 entries. You can play the game in your browser on itch.io. There is also a downloadable build available for Windows.",
+        tags: ["Godot", "Blender", "Aseprite"],
+        imageUrl: orbitalDefenseImg,
+        demoLink: 'https://itch.io/jam/gmtk-2025/rate/3771522',
+        githubLink: '',
+        features: [
+            "Main Menu with saved settings and high score tracking.",
+            "Orbital manager that rotates your structures around a home planet, new orbital paths are added every 5 waves and you can toggle the orbit direction.",
+            "Wave spawner that dynamically spawns enemies using a token economy based on the current wave number.",
+            "3 Distinct enemy types with different movement patterns and effects.",
+            "5 Purchaseable towers/items with unique effects/behaviour.",
+            "Upgrade generator that allows players to select from 3 random upgrades when they finish a perfect wave.",
+        ],
+        learningOutcomes: [
+            "Gained experience working with severe time constraints to rapidly prototype and iterate on game mechanics.",
+            "Improved my ability to prioritize features and manage scope.",
+            "Practiced modular system design to allow for rapid iteration and debugging.",
+            "Learned the basics of the Godot game engine and GDScript.",
+            "Learned how to deploy a game to the web and Windows.",
+        ]
+    },
     /*
     {
         title: "Blog/Social Media Clone",
         description: "This is a Node.js app I made using React and Tailwind CSS. The site features account registration, login authentication, and has the ability for users to make posts and attach images to them."
         tags: ["TypeScript", "React", "Node.js", "Tailwind", "Framer Motion", "SQL", "HTML", "Git"],
-        imageUrl: datawebsiteImg,
-        demoLink: '',
-        githubLink: '',
-    },
-    {
-        title: "Dilbo-ui & Demo Site",
-        description: "This is a UI component library I built using React, Tailwind and Storybook. I published it publically on npm and you can import it yourself by running npm i dilbo-ui and then @import '@DBordeleau/components'. You can visit the live demo to access a Node.js where you can see all the components I've made."
-        tags: ["React", "Tailwind", "Storybook", "Node.js"],
         imageUrl: datawebsiteImg,
         demoLink: '',
         githubLink: '',
