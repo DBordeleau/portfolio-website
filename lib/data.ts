@@ -7,6 +7,7 @@ import yofhldbImg from '@/public/yofhldbscreenshot.png'
 import draftlotteryImg from '@/public/DraftLotteryPreview.gif'
 import autograderImg from '@/public/autograder.gif'
 import orbitalDefenseImg from '@/public/orbitalDefenseImg.png'
+import cpuSimImg from '@/public/cpusimscreenshot.png'
 
 type Project = {
     title: string;
@@ -58,6 +59,29 @@ export const experiencesData = [
 ] as const;
 
 export const projectsData: readonly Project[] = [
+    {
+        title: "CPU Scheduler Simulator",
+        slug: "cpu-scheduler-simulator",
+        description:
+            "A simulation of a CPU scheduler that demonstrates various scheduling algorithms such as FCFS, SJF, SRTF, Preemptive Priority and Round Robin. Users can visualize the scheduling process and see how different algorithms affect the performance of a set of processes. There is also a quiz mode that tests users on their understanding of the algorithms.",
+        tags: ["Java", "Spring Boot", "JUnit", "Javascript", "React", "Docker"],
+        imageUrl: cpuSimImg,
+        demoLink: '',
+        githubLink: 'https://github.com/DBordeleau/cpu_scheduler_sim',
+        githubOwner: 'DBordeleau',
+        features: [
+            "Core simulation engine that can simulate FCFS, SJF, SRTF, Preemptive Priority and Round Robin scheduling algorithms and calculate waiting and turnaround times as well as number of context switches.",
+            "Interactive React front-end that allows users to create processes, select scheduling algorithms and visualize the scheduling process in real-time.",
+            "Quiz mode that tests users on their understanding of the scheduling algorithms.",
+            "Dockerized deployment for easy setup and use.",
+        ],
+        learningOutcomes: [
+            "Designed and implemented a CPU scheduling simulation engine in Java that supports multiple scheduling algorithms. This involved understanding the intricacies of each algorithm and ensuring accurate simulation of process scheduling.",
+            "Wrote comprehensive unit tests using JUnit to ensure the correctness and reliability of each scheduling algorithm.",
+            "Built a REST API using Spring Boot to connect the Java backend with the React front-end. I deployed the backend separately from the front-end using Fly.io.",
+            "Designed and developed an interactive React front-end that allows users to create processes, run different scheduling algorithms and visualize the scheduling process in real-time. I deployed the front-end using Vercel.",
+        ]
+    },
     {
         title: "C++ Autograding Server",
         slug: "cpp-autograding-server",
@@ -245,6 +269,7 @@ export const skillsData = [
     { name: "Node.js", icon: "FaNodeJs" },
     { name: "SQL", icon: "FaDatabase" },
     { name: "PostgreSQL", icon: "SiPostgresql" },
+    { name: "Sprint Boot", icon: "SiSpringboot" },
     { name: "Flask", icon: "SiFlask" },
     { name: "FastAPI", icon: "SiFastapi" },
     { name: "PyTorch", icon: "SiPytorch" },
