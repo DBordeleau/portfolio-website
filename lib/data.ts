@@ -66,7 +66,7 @@ export const projectsData: readonly Project[] = [
             "A simulation of a CPU scheduler that demonstrates various scheduling algorithms such as FCFS, SJF, SRTF, Preemptive Priority and Round Robin. Users can visualize the scheduling process and see how different algorithms affect the performance of a set of processes. There is also a quiz mode that tests users on their understanding of the algorithms.",
         tags: ["Java", "Spring Boot", "JUnit", "Javascript", "React", "Docker"],
         imageUrl: cpuSimImg,
-        demoLink: '',
+        demoLink: 'https://cpu-scheduler-sim.vercel.app/',
         githubLink: 'https://github.com/DBordeleau/cpu_scheduler_sim',
         githubOwner: 'DBordeleau',
         features: [
