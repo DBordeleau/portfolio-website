@@ -15,15 +15,24 @@ export default function SubmitBtn() {
       console.error('Missing NEXT_PUBLIC_RECAPTCHA_SITE_KEY');
       return;
     }
-    const w = typeof window !== 'undefined' ? window as any : null;
-    if (!w || !w.grecaptcha) {
-      console.error('grecaptcha not loaded yet');
-      return;
-    }
+    
     setLoading(true);
+    
     try {
-      await w.grecaptcha.ready();
+      const w = window as any;
+      
+      if (!w.grecaptcha) {
+        console.error('grecaptcha not loaded');
+        setLoading(false);
+        return;
+      }
+
+      await new Promise((resolve) => {
+        w.grecaptcha.ready(() => resolve(true));
+      });
+
       const token = await w.grecaptcha.execute(siteKey, { action: 'submit' });
+      
       const f = document.getElementById('contact-form') as HTMLFormElement | null;
       if (f) {
         let input = f.querySelector('input[name="g-recaptcha-response"]') as HTMLInputElement | null;
@@ -34,8 +43,12 @@ export default function SubmitBtn() {
           f.appendChild(input);
         }
         input.value = token;
-        if (typeof f.requestSubmit === 'function') f.requestSubmit();
-        else f.submit();
+        
+        if (typeof f.requestSubmit === 'function') {
+          f.requestSubmit();
+        } else {
+          f.submit();
+        }
       } else {
         console.error('contact-form not found');
         setLoading(false);

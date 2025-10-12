@@ -27,8 +27,9 @@ export default function RootLayout({
     <html lang="en" className="!scroll-smooth">
       <head>
          <Script
+           id="recaptcha-script"
            src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-           strategy="afterInteractive"
+           strategy="lazyOnload"
          />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
