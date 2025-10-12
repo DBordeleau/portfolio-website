@@ -1,14 +1,20 @@
 'use client';
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom';
 import { FaPaperPlane } from 'react-icons/fa'
 
-export default function SubmitBtn() {
+export default function SubmitBtn({ resetLoading }: { resetLoading: boolean }) {
     const { pending } = useFormStatus();
     const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
     const [loading, setLoading] = useState(false);
     
+  useEffect(() => {
+    if (resetLoading) {
+      setLoading(false);
+    }
+  }, [resetLoading]);
+
   async function handleClick() {
     if (pending || loading) return;
     if (!siteKey) {

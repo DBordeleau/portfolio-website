@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SectionHeader from './section-header';
 import { motion } from 'framer-motion';
 import { useSectionInView } from '@/lib/hooks';
@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 export default function Contact() {
   const { ref } = useSectionInView('Contact')
   const formRef = useRef<HTMLFormElement>(null);
+  const [resetLoading, setResetLoading] = useState(false);
 
   useEffect(() => {
     console.log(
@@ -45,10 +46,12 @@ export default function Contact() {
 
         toast.success('Email sent!');
         formRef.current?.reset();
+        setResetLoading(true);
+        setTimeout(() => setResetLoading(false), 100);
       }}>
         <input id='senderEmail' name="senderEmail" className='px-4 h-14 rounded-lg border border-black/[10] dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' type='email' required maxLength={100} placeholder='email@example.com' />
         <textarea id='message' name="message" placeholder='Enter your message' className='w-[100%] sm:w-[40rem] px-4 pt-4 h-[20rem] my-3 rounded-lg border border-black/[10] dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' required />
-        <SubmitBtn />
+        <SubmitBtn resetLoading={resetLoading} />
       </form>
     </motion.section>
   );
