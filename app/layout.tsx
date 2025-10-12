@@ -8,6 +8,7 @@ import ThemeToggle from "@/components/themeToggle";
 import ThemeContextProvider from "@/context/theme-context";
 import KonamiTerminalWrapper from "@/components/terminalwrapper";
 import { DeletionEffectProvider } from '@/context/deletionsimulationcontext';
+import Script from "next/script";
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,8 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <head>
-         <script src="https://www.google.com/recaptcha/api.js"></script>
-         <script dangerouslySetInnerHTML={{ __html: `
+         <Script
+           src="https://www.google.com/recaptcha/api.js"
+           strategy="afterInteractive"
+         />
+         <Script id="recaptcha-callback" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `
            function onSubmit(token) {
              var f = document.getElementById('contact-form');
              if (f) {
