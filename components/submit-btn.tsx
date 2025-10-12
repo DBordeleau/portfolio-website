@@ -68,7 +68,7 @@ export default function SubmitBtn() {
     >
         {
             (pending || loading) ? (
-                <div className="bg-black h-5 w-5 animate-spin rounded-full border-b-2 border-white border-dotted"></div>
+                <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
         ) : (
               <>
                 Submit

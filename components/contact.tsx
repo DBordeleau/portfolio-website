@@ -1,16 +1,16 @@
 'use client';
 
-import React from 'react'
-import SectionHeader from './section-header'
-import { sendEmail } from '@/actions/sendEmail'
-import { motion } from 'framer-motion'
+import React, { useEffect, useRef } from 'react';
+import SectionHeader from './section-header';
+import { motion } from 'framer-motion';
 import { useSectionInView } from '@/lib/hooks';
+import { sendEmail } from '@/actions/sendEmail';
 import SubmitBtn from './submit-btn';
 import toast from 'react-hot-toast';
-import { useEffect } from 'react';
 
 export default function Contact() {
   const { ref } = useSectionInView('Contact')
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     console.log(
@@ -29,33 +29,22 @@ export default function Contact() {
       <SectionHeader>Get in touch</SectionHeader>
       <p className='text-gray-700 dark:text-white/80 -mt-6'>You can reach me directly at <a className='underline' href="mailto:dillonbordeleau@gmail.com">DillonBordeleau@gmail.com</a> or use this form.</p>
 
-      <form id="contact-form" className='mt-10 flex flex-col dark:text-black' action={async formData => {
+      <form ref={formRef} id="contact-form" className='mt-10 flex flex-col dark:text-black' action={async formData => {
         const { data, error } = await sendEmail(formData);
         const flowey = document.getElementById('flower');
         let easterEggAudio = new Audio('/easter-egg-audio.wav')
 
-        if (error == "easter egg") { //Easter egg
+        if (error == "easter egg") {
           easterEggAudio.play();
-          flowey?.classList.add('flowey');
-
-          toast('Clever. Verrrryyy clever.', {
-            icon: '🌻',
-            position: "top-center",
-            style: {
-              color: 'black',
-              backgroundColor: 'yellow',
-              border: '1px solid black',
-            }
-          })
-          return;
         }
 
         if (error) {
-          toast.error(error)
+          toast.error(error);
           return;
         }
 
-        toast.success('Email sent!')
+        toast.success('Email sent!');
+        formRef.current?.reset();
       }}>
         <input id='senderEmail' name="senderEmail" className='px-4 h-14 rounded-lg border border-black/[10] dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' type='email' required maxLength={100} placeholder='email@example.com' />
         <textarea id='message' name="message" placeholder='Enter your message' className='w-[100%] sm:w-[40rem] px-4 pt-4 h-[20rem] my-3 rounded-lg border border-black/[10] dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 dark:outline-none transition-all' required />
