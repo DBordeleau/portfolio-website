@@ -29,7 +29,7 @@ export default function Contact() {
       <SectionHeader>Get in touch</SectionHeader>
       <p className='text-gray-700 dark:text-white/80 -mt-6'>You can reach me directly at <a className='underline' href="mailto:dillonbordeleau@gmail.com">DillonBordeleau@gmail.com</a> or use this form.</p>
 
-      <form className='mt-10 flex flex-col dark:text-black' action={async formData => {
+      <form id="contact-form" className='mt-10 flex flex-col dark:text-black' action={async formData => {
         const { data, error } = await sendEmail(formData);
         const flowey = document.getElementById('flower');
         let easterEggAudio = new Audio('/easter-egg-audio.wav')

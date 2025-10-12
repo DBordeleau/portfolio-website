@@ -25,6 +25,25 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <head>
+         <script src="https://www.google.com/recaptcha/api.js"></script>
+         <script dangerouslySetInnerHTML={{ __html: `
+           function onSubmit(token) {
+             var f = document.getElementById('contact-form');
+             if (f) {
+               // ensure token is sent with the form
+               var input = f.querySelector('input[name="g-recaptcha-response"]');
+               if (!input) {
+                 input = document.createElement('input');
+                 input.type = 'hidden';
+                 input.name = 'g-recaptcha-response';
+                 f.appendChild(input);
+               }
+               input.value = token;
+               if (typeof f.requestSubmit === 'function') f.requestSubmit();
+               else f.submit();
+             }
+           }
+         `}} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={`${inter.className} bg-gray-50 text-gray-950 relative pt-28 sm:pt-36 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90 transition-all`}>
