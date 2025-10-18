@@ -8,6 +8,7 @@ import draftlotteryImg from '@/public/DraftLotteryPreview.gif'
 import autograderImg from '@/public/autograder.gif'
 import orbitalDefenseImg from '@/public/orbitalDefenseImg.png'
 import cpuSimImg from '@/public/cpusimscreenshot.png'
+import picoThermometerImg from '@/public/picoWDiagram.png';
 
 type Project = {
     title: string;
@@ -59,6 +60,27 @@ export const experiencesData = [
 ] as const;
 
 export const projectsData: readonly Project[] = [
+    {
+        title: "Pico W Wi-Fi Thermometer",
+        slug: "pico-w-thermometer",
+        description: "Embedded Wi-Fi thermometer built with a Raspberry Pi Pico W. Reads temperature and humidity data from a DHT11 sensor and displays it to an onboard OLED display, as well as a web interface hosted on the device itself.",
+        tags: ["C++", "C", "Embedded Systems", "IoT", "Device Drivers"],
+        imageUrl: picoThermometerImg,
+        demoLink: 'https://www.youtube.com/watch?v=NePnPrrfUlU',
+        githubLink: 'https://github.com/DBordeleau/PicoW-Wifi-Thermometer',
+        features: [
+            "Onboard OLED display that shows current temperature and humidity readings.",
+            "HTTP server hosted on the Pico W that serves a HTML page and JSON API to provide real-time temperature and humidity data to a web client.",
+            "Push button toggle for switching between Celsius and Fahrenheit.",
+            "Custom splash screen and wi-fi loading animation on the OLED display.",
+        ],
+        learningOutcomes: [
+            "Implemented I2C communication with an OLED display (using the u8g2 library) and DHT11 sensor using C/C++.",
+            "Developed a DHT11 device driver to read temperature and humidity data from scratch using only the datasheet as a reference.",
+            "Integrated a lwIP server to serve a web interface and JSON API directly from the Pico W.",
+            "Combined hardware assembly with firmware and web development to create a fully functional IoT device."
+        ]
+    },
     {
         title: "CPU Scheduler Simulator",
         slug: "cpu-scheduler-simulator",
