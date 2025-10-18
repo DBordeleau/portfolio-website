@@ -1,15 +1,80 @@
-import React from 'react'
+'use client';
+
+import React, { useState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom';
 import { FaPaperPlane } from 'react-icons/fa'
 
-export default function SubmitBtn() {
+export default function SubmitBtn({ resetLoading }: { resetLoading: boolean }) {
     const { pending } = useFormStatus();
+    const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    const [loading, setLoading] = useState(false);
+    
+  useEffect(() => {
+    if (resetLoading) {
+      setLoading(false);
+    }
+  }, [resetLoading]);
+
+  async function handleClick() {
+    if (pending || loading) return;
+    if (!siteKey) {
+      console.error('Missing NEXT_PUBLIC_RECAPTCHA_SITE_KEY');
+      return;
+    }
+    
+    setLoading(true);
+    
+    try {
+      const w = window as any;
+      
+      if (!w.grecaptcha) {
+        console.error('grecaptcha not loaded');
+        setLoading(false);
+        return;
+      }
+
+      await new Promise((resolve) => {
+        w.grecaptcha.ready(() => resolve(true));
+      });
+
+      const token = await w.grecaptcha.execute(siteKey, { action: 'submit' });
+      
+      const f = document.getElementById('contact-form') as HTMLFormElement | null;
+      if (f) {
+        let input = f.querySelector('input[name="g-recaptcha-response"]') as HTMLInputElement | null;
+        if (!input) {
+          input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'g-recaptcha-response';
+          f.appendChild(input);
+        }
+        input.value = token;
+        
+        if (typeof f.requestSubmit === 'function') {
+          f.requestSubmit();
+        } else {
+          f.submit();
+        }
+      } else {
+        console.error('contact-form not found');
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error('recaptcha error', err);
+      setLoading(false);
+    }
+  }
     
   return (
-    <button type='submit' className='group flex items-center justify-center gap-2 focus:scale-110 hover:bg-gray-950 hover:scale-110 active:scale-105 h-[3rem] w-[8rem] bg-gray-900 text-white rounded-full outline-none transition-all disabled:scale-100 disabled:bg-opacity-70 dark:bg-white dark:bg-opacity-10' disabled={pending}>
+    <button 
+    type='button'
+    onClick={handleClick}
+    className='group flex items-center justify-center gap-2 focus:scale-110 hover:bg-gray-950 hover:scale-110 active:scale-105 h-[3rem] w-[8rem] bg-gray-900 text-white rounded-full outline-none transition-all disabled:scale-100 disabled:bg-opacity-70 dark:bg-white dark:bg-opacity-10'
+    disabled={pending || loading}
+    >
         {
-            pending ? (
-                <div className="bg-black h-5 w-5 animate-spin rounded-full border-b-2 border-white border-dotted"></div>
+            (pending || loading) ? (
+                <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
         ) : (
               <>
                 Submit

@@ -8,6 +8,7 @@ import ThemeToggle from "@/components/themeToggle";
 import ThemeContextProvider from "@/context/theme-context";
 import KonamiTerminalWrapper from "@/components/terminalwrapper";
 import { DeletionEffectProvider } from '@/context/deletionsimulationcontext';
+import Script from "next/script";
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,6 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <head>
+         <Script
+           id="recaptcha-script"
+           src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+           strategy="lazyOnload"
+         />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={`${inter.className} bg-gray-50 text-gray-950 relative pt-28 sm:pt-36 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90 transition-all`}>
