@@ -9,6 +9,7 @@ import autograderImg from '@/public/autograder.gif'
 import orbitalDefenseImg from '@/public/orbitalDefenseImg.png'
 import cpuSimImg from '@/public/cpusimscreenshot.png'
 import picoThermometerImg from '@/public/picoWDiagram.png';
+import ottawaHousingImg from '@/public/ottawaHousingTrendsgif.gif';
 
 type Project = {
     title: string;
@@ -60,6 +61,26 @@ export const experiencesData = [
 ] as const;
 
 export const projectsData: readonly Project[] = [
+    {
+        title: "Ottawa Housing Trends Dashboard",
+        slug: "ottawa-housing-trends-dashboard",
+        description: "A web application that visualizes housing trends in Ottawa using real estate data. Data is scraped every Monday via a Python script using Github Actions.",
+        tags: ["Python", "React", "PostgreSQL", "Next.js"],
+        imageUrl: ottawaHousingImg,
+        demoLink: 'https://ottawa-housing-trends.vercel.app/',
+        githubLink: 'https://github.com/DBordeleau/ottawa-housing-scraper',
+        features: [
+            "Scheduled scraper that collects data every Monday using Github Actions.",
+            "Scraper uses a rotating list of proxies and user agents, and has exponential backoff for retries.",
+            "Parses Reddit JSON data and uploads it to a PostgreSQL database.",
+            "Next.js frontend that displays sales and rental data separately using interactive Recharts.",
+        ],
+        learningOutcomes: [
+            "Developed a web scraping pipeline using Python and Requests.",
+            "Implemented a proxy rotator to avoid IP bans and exponential backoff + random delays to avoid rate limiting.",
+            "Developed a mobile responsive dashboard using React and Recharts to display data in a meaningful way."
+        ]
+    },
     {
         title: "Pico W Wi-Fi Thermometer",
         slug: "pico-w-thermometer",
