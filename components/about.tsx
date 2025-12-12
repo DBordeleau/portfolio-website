@@ -22,7 +22,7 @@ export default function About() {
         In addition to my coursework, I have been learning front-end development and working on some independent projects
         in my free time. I'm looking for {" "}
         <span className="font-bold">
-          part-time internship opportunities ahead of my May 2026 graduation where I can continue to develop my skills and excel as an important part of your team. {" "}
+          part-time internship opportunities ahead of my December 2026 graduation where I can continue to develop my skills and excel as an important part of your team. {" "}
         </span>
       </p>
 
