@@ -9,7 +9,7 @@ import autograderImg from '@/public/autograder.gif'
 import orbitalDefenseImg from '@/public/orbitalDefenseImg.png'
 import cpuSimImg from '@/public/cpusimscreenshot.png'
 import picoThermometerImg from '@/public/picoWDiagram.png';
-import ottawaHousingImg from '@/public/ottawaHousingTrendsgif.gif';
+import tickerWarsImg from '@/public/tickerWarsImg.png';
 
 type Project = {
     title: string;
@@ -62,23 +62,24 @@ export const experiencesData = [
 
 export const projectsData: readonly Project[] = [
     {
-        title: "Ottawa Housing Trends Dashboard",
-        slug: "ottawa-housing-trends-dashboard",
-        description: "A web application that visualizes housing trends in Ottawa using real estate data. Data is scraped every Monday via a Python script using Github Actions.",
-        tags: ["Python", "React", "PostgreSQL", "Next.js"],
-        imageUrl: ottawaHousingImg,
-        demoLink: 'https://ottawa-housing-trends.vercel.app/',
-        githubLink: 'https://github.com/DBordeleau/ottawa-housing-scraper',
+        title: "Ticker Wars",
+        slug: "ticker-wars",
+        description: "Ticker Wars is a stock forecasting platform that pits real users against machine learning models. It is supported by a data ingestion and machine learning pipeline built with Python.",
+        tags: ["Python", "Machine Learning", "React", "TypeScript", "PostgreSQL", "Pandas", "Github Actions"],
+        imageUrl: tickerWarsImg,
+        demoLink: 'https://tickerwars.vercel.app/',
+        githubLink: 'https://github.com/DBordeleau/ticker-wars',
         features: [
-            "Scheduled scraper that collects data every Monday using Github Actions.",
-            "Scraper uses a rotating list of proxies and user agents, and has exponential backoff for retries.",
-            "Parses Reddit JSON data and uploads it to a PostgreSQL database.",
-            "Next.js frontend that displays sales and rental data separately using interactive Recharts.",
+            "Automated Python pipeline that ingests market data, builds horizon-aware features, generates ML predictions, scores matured predictions, and refreshes dashboard projection tables daily.",
+            "Multi-horizon forecasting system that tracks predictions across 1W, 1M, 3M, and 1Y target windows with durable prediction storage before outcomes are known.",
+            "Model leaderboard comparing baseline, linear regression, random forest, and time-series foundation model adapters using MAPE, directional accuracy, and interval scoring.",
+            "Interactive React dashboard with ticker pages, model detail pages, user profiles, rechart charts, confidence intervals, user prediction flows, and leaderboards."
         ],
         learningOutcomes: [
-            "Developed a web scraping pipeline using Python and Requests.",
-            "Implemented a proxy rotator to avoid IP bans and exponential backoff + random delays to avoid rate limiting.",
-            "Developed a mobile responsive dashboard using React and Recharts to display data in a meaningful way."
+            "Designed a time-aware ML evaluation workflow that stores predictions and evaluates them only after a target date is reached.",
+            "Built an end-to-end data pipeline for ingestion, feature generation, model training & execution, prediction evaluation, dashboard table refreshes, and static snapshot export as a fallback.",
+            "Modeled a Supabase/PostgreSQL schema that separates normalized pipeline data from frontend-optimized projection tables for fast public dashboard reads.",
+            "Explored and implemented storage optimization and third party API rate limiting strategies to keep the platform operational with a $0 budget."
         ]
     },
     {
