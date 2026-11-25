@@ -2,11 +2,16 @@
   "name": "portfolio-website",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node --test \"scripts/*.test.mjs\"",
+    "prepare": "node scripts/install-hooks.mjs"
   },
   "dependencies": {
     "@react-email/components": "^0.0.26",
@@ -18,9 +23,9 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "eslint": "9.13.0",
-    "eslint-config-next": "15.0.1",
+    "eslint-config-next": "15.5.29",
     "framer-motion": "^11.11.10",
-    "next": "15.0.7",
+    "next": "15.5.29",
     "node-emoji": "^2.2.0",
     "postcss": "8.4.47",
     "react": "18.3.1",
