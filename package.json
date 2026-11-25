@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node --test \"scripts/*.test.mjs\"",
+    "prepare": "node scripts/install-hooks.mjs"
   },
   "dependencies": {
     "@react-email/components": "^0.0.26",
