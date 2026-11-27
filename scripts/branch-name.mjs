@@ -2,13 +2,13 @@
 export const BRANCH_NAME_PATTERN =
   /^(feat|fix|refactor|perf|test|docs|chore)\/[0-9]+-[a-z0-9]+(-[a-z0-9]+)*$/;
 
-// The default branch is exempt so merged work can still be pushed to it.
-const EXEMPT_BRANCHES = new Set(['master']);
+// The default branch, master, fails the pattern on purpose: it moves through
+// merged pull requests, not local pushes. Override once with --no-verify.
 
 const ZERO_SHA = /^0+$/;
 
 export function isValidBranchName(name) {
-  return EXEMPT_BRANCHES.has(name) || BRANCH_NAME_PATTERN.test(name);
+  return BRANCH_NAME_PATTERN.test(name);
 }
 
 // Takes the text git writes to a pre-push hook's stdin, one line per ref:
