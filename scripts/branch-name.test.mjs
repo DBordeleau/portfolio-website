@@ -15,10 +15,6 @@ test('accepts <type>/<issue>-<slug> names', () => {
   assert.ok(isValidBranchName('chore/7-astro'));
 });
 
-test('accepts the default branch', () => {
-  assert.ok(isValidBranchName('master'));
-});
-
 test('rejects names that break the rule', () => {
   for (const name of [
     'claude/portfolio-codebase-audit-be0a96',
@@ -29,6 +25,7 @@ test('rejects names that break the rule', () => {
     'fix/1-',
     'fix/1',
     'main',
+    'master',
   ]) {
     assert.equal(isValidBranchName(name), false, name);
   }
